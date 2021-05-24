@@ -1,4 +1,3 @@
-const router = require('express').Router();
 const userRoute = require('./userRoute');
 const siteRoute = require('./siteRoute');
 
