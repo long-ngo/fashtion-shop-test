@@ -1,6 +1,6 @@
 const express = require('express');
 const mainRoute = require('./src/routes/mainRoute');
-const db = require('./src/config/db/connect');
+const db = require('./src/config/db/atlas');
 const path = require('path');
 
 require('dotenv').config();
