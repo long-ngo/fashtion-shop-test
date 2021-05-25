@@ -7,7 +7,7 @@ class UserController {
             .then(users => {
                 res.send(users);
             })
-            .catch(next)
+            .catch(next);
     }
 }
 
