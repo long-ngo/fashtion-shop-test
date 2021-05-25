@@ -1,7 +1,7 @@
 const express = require('express');
+const path = require('path');
 const mainRoute = require('./src/routes/mainRoute');
 const db = require('./src/config/db/atlas');
-const path = require('path');
 
 require('dotenv').config();
 db.connect();
