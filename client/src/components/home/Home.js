@@ -6,7 +6,13 @@ const Home = () => {
 
     useEffect(() => {
         axios
-            .get(`${process.env.DEPLOY_URL || 'http://localhost:5000'}/api/products`)
+            .get(
+                `${
+                    process.env.NODE_ENV === 'production'
+                        ? window.location.origin
+                        : 'http://localhost:5000'
+                }/api/products`
+            )
             .then((res) => {
                 setProduct(res.data);
             })
