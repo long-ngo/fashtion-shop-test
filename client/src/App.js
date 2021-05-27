@@ -1,50 +1,28 @@
-import logo from './logo.svg';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import Navigation from './components/navigation/Navigation';
+import Home from './components/home/Home';
+import Products from './components/product/Products';
+import About from './components/about/About';
+import Error from './components/error/Error';
+import Header from './components/header/Header';
+import Footer from './components/footer/Footer';
 
-function App() {
-    const products = [
-        {
-          productName: 'áo thun',
-          unitsInStock: 5,
-          unitPrice: 20000,
-          image: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Ftikibook.com%2Fdia-chi-ban-ao-thun-gia-si-re-nhat-thanh-pho-ho-chi-minh-pr1233.html&psig=AOvVaw0DRzfEpGeZeB9njiFAGa66&ust=1622020288452000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCNiP3sy-5PACFQAAAAAdAAAAABAI'
-        },
-        {
-          productName: 'áo khoác',
-          unitsInStock: 5,
-          unitPrice: 20000,
-          image: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fvoso.vn%2Fao-khoac-du-hai-lop-hades-p105319.html&psig=AOvVaw0HruCcvRW8X9STBOfBgf9m&ust=1622020379590000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCLjF_P6-5PACFQAAAAAdAAAAABAD'
-        }
-    ];
-
+const App = () => {
     return (
-        <div className="App">
-            <h1>Reactjs</h1>
-
-            <table>
-            {products.map(product => {
-                return (
-                    <div>
-                        <th>
-                            <td>Tên sản phẩm</td>
-                            <td>Giá</td>
-                            <td>Số lượng</td>
-                            <td>Hình ảnh</td>
-                        </th>
-                            <tr>
-                            <td>{product.productName}</td>
-                            <td>{product.unitPrice}</td>
-                            <td>{product.unitsInStock}</td>
-                            <td>
-                                <img src={product.image} alt={product.productName}></img>
-                            </td>
-                        </tr>
-                    </div>
-                )
-            })}
-            </table>
-        </div>
+        <Router>
+            <Header />
+            <Navigation />
+            <Switch>
+                <Route exact path='/' component={ Home } />
+                <Route path='/products' component={ Products } />
+                <Route path='/about' component={ About } />
+                <Route path='/:somestring' component={ Error } />
+            </Switch>
+            <Footer />
+        </Router>
     );
-}
+};
 
 export default App;
