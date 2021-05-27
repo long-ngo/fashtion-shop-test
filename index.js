@@ -1,5 +1,7 @@
 const express = require('express');
 const path = require('path');
+const cors = require('cors');
+
 const mainRoute = require('./src/routes/mainRoute');
 const db = require('./src/config/db/mongo');
 
@@ -7,6 +9,10 @@ require('dotenv').config();
 db.connect();
 
 const app = express();
+app.use(cors({
+    origin: 'http://localhost:3000'
+}));
+
 mainRoute(app);
 
 // Server static assets if production

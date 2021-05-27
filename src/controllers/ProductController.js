@@ -4,7 +4,7 @@ class ProductController {
     //[GET] /api/products
     getProducts(req, res, next) {
         Product.find({})
-            .then(products => res.send(products))
+            .then(products => res.json(products))
             .catch(next);
     }
 }
