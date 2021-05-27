@@ -6,7 +6,7 @@ const Home = () => {
 
     useEffect(() => {
         axios
-            .get('http://localhost:5000/api/products')
+            .get(`${process.env.DEPLOY_URL || 'http://localhost:5000'}/api/products`)
             .then((res) => {
                 setProduct(res.data);
             })
