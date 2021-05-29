@@ -9,7 +9,7 @@ const Home = () => {
             .get(
                 `${
                     process.env.NODE_ENV === 'production'
-                        ? window.location.origin
+                        ? location.origin
                         : 'http://localhost:5000'
                 }/api/products`
             )
