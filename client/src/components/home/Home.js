@@ -17,6 +17,7 @@ const Home = () => {
                 setProduct(res.data);
             })
             .catch((err) => console.log(err));
+            return () => setProduct([]);
     }, []);
 
     return (
