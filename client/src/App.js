@@ -1,24 +1,23 @@
-import './App.css';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Navbars from './components/navbars/Navbars';
-import Home from './components/home/Home';
-import Products from './components/product/Products';
-import About from './components/about/About';
-import Error from './components/error/Error';
-import Header from './components/header/Header';
-import Footer from './components/footer/Footer';
+import Header from './components/Header';
+import Home from './components/Home';
+import Products from './components/Products';
+import About from './components/About';
+import Footer from './components/Footer';
+import Error from './components/Error';
 
 const App = () => {
     return (
         <Router>
             <Header />
-            <Navbars />
+
             <Switch>
                 <Route exact path='/' component={ Home } />
                 <Route path='/products' component={ Products } />
                 <Route path='/about' component={ About } />
                 <Route path='/:somestring' component={ Error } />
             </Switch>
+
             <Footer />
         </Router>
     );
