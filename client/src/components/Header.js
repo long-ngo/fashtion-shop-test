@@ -2,40 +2,31 @@ import Topbar from "./Topbar";
 import { useEffect } from "react";
 
 const Header = () => {
-    useEffect(() => {
-        /**
-         * Easy selector helper function
-         */
-        const select = (el, all = false) => {
-            el = el.trim();
+    const select = (el, all = false) => {
+        el = el.trim();
+        if (all) {
+            return [...document.querySelectorAll(el)];
+        } else {
+            return document.querySelector(el);
+        }
+    };
+
+    const on = (type, el, listener, all = false) => {
+        let selectEl = select(el, all);
+        if (selectEl) {
             if (all) {
-                return [...document.querySelectorAll(el)];
+                selectEl.forEach((e) => e.addEventListener(type, listener));
             } else {
-                return document.querySelector(el);
+                selectEl.addEventListener(type, listener);
             }
-        };
+        }
+    };
 
-        /**
-         * Easy event listener function
-         */
-        const on = (type, el, listener, all = false) => {
-            let selectEl = select(el, all);
-            if (selectEl) {
-                if (all) {
-                    selectEl.forEach((e) => e.addEventListener(type, listener));
-                } else {
-                    selectEl.addEventListener(type, listener);
-                }
-            }
-        };
+    const onscroll = (el, listener) => {
+        el.addEventListener("scroll", listener);
+    };
 
-        /**
-         * Easy on scroll event listener
-         */
-        const onscroll = (el, listener) => {
-            el.addEventListener("scroll", listener);
-        };
-
+    useEffect(() => {
         /**
          * Navbar links active state on scroll
          */
@@ -170,6 +161,7 @@ const Header = () => {
             }
         });
     });
+    
     return (
         <>
             <Topbar />
@@ -180,7 +172,7 @@ const Header = () => {
                 <div className="container-fluid container-xl d-flex align-items-center justify-content-between">
                     <div className="logo me-auto">
                         <h1>
-                            <a href="index.html">Delicious</a>
+                            <a href="index.html">Fashtion Shop</a>
                         </h1>
                         {/* Uncomment below if you prefer to use an image logo */}
                         {/* <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>*/}
@@ -192,94 +184,82 @@ const Header = () => {
                                     className="nav-link scrollto active"
                                     href="#hero"
                                 >
-                                    Home
+                                    Trang chính
                                 </a>
                             </li>
-                            <li>
-                                <a className="nav-link scrollto" href="#about">
-                                    About
+                            <li className="dropdown">
+                                <a href="#menu">
+                                    <span>Sản phẩm</span>
+                                    <i className="bi bi-chevron-down" />
                                 </a>
+                                <ul>
+                                    <li>
+                                        <a href="#">Thời trang nam</a>
+                                    </li>
+                                    <li className="dropdown">
+                                        <a href="#menu">
+                                            <span>Thời trang nữ</span>
+                                            <i className="bi bi-chevron-right" />
+                                        </a>
+                                        <ul>
+                                            <li>
+                                                <a href="#">Đầm</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">Váy</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">Áo thun</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="#">Còn lại</a>
+                                    </li>
+                                </ul>
                             </li>
-                            <li>
+                            {/* <li>
                                 <a className="nav-link scrollto" href="#menu">
-                                    Menu
+                                    Sản phẩm
                                 </a>
-                            </li>
+                            </li> */}
                             <li>
                                 <a
                                     className="nav-link scrollto"
                                     href="#specials"
                                 >
-                                    Specials
+                                    Mẹo
                                 </a>
                             </li>
                             <li>
                                 <a className="nav-link scrollto" href="#events">
-                                    Events
+                                    Sự kiện
                                 </a>
                             </li>
-                            <li>
+                            {/* <li>
                                 <a className="nav-link scrollto" href="#chefs">
-                                    Chefs
+                                    Nhân viên
                                 </a>
-                            </li>
+                            </li> */}
                             <li>
                                 <a
                                     className="nav-link scrollto"
                                     href="#gallery"
                                 >
-                                    Gallery
+                                    Xưởng
                                 </a>
-                            </li>
-                            <li className="dropdown">
-                                <a href="#">
-                                    <span>Drop Down</span>
-                                    <i className="bi bi-chevron-down" />
-                                </a>
-                                <ul>
-                                    <li>
-                                        <a href="#">Drop Down 1</a>
-                                    </li>
-                                    <li className="dropdown">
-                                        <a href="#">
-                                            <span>Deep Drop Down</span>
-                                            <i className="bi bi-chevron-right" />
-                                        </a>
-                                        <ul>
-                                            <li>
-                                                <a href="#">Deep Drop Down 1</a>
-                                            </li>
-                                            <li>
-                                                <a href="#">Deep Drop Down 2</a>
-                                            </li>
-                                            <li>
-                                                <a href="#">Deep Drop Down 3</a>
-                                            </li>
-                                            <li>
-                                                <a href="#">Deep Drop Down 4</a>
-                                            </li>
-                                            <li>
-                                                <a href="#">Deep Drop Down 5</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="#">Drop Down 2</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Drop Down 3</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Drop Down 4</a>
-                                    </li>
-                                </ul>
                             </li>
                             <li>
                                 <a
                                     className="nav-link scrollto"
                                     href="#contact"
                                 >
-                                    Contact
+                                    Liên hệ
+                                </a>
+                            </li>
+                            <li>
+                                <a className="nav-link scrollto" href="#about">
+                                    Về chúng tôi
                                 </a>
                             </li>
                         </ul>
@@ -290,7 +270,7 @@ const Header = () => {
                         href="#book-a-table"
                         className="book-a-table-btn scrollto"
                     >
-                        Book a table
+                        Giỏ hàng
                     </a>
                 </div>
             </header>

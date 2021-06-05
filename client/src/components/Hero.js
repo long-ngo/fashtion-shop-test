@@ -1,19 +1,16 @@
 import { useEffect } from "react";
 
 const Hero = () => {
+    const select = (el, all = false) => {
+        el = el.trim();
+        if (all) {
+            return [...document.querySelectorAll(el)];
+        } else {
+            return document.querySelector(el);
+        }
+    };
+    
     useEffect(() => {
-         /**
-         * Easy selector helper function
-         */
-          const select = (el, all = false) => {
-            el = el.trim();
-            if (all) {
-                return [...document.querySelectorAll(el)];
-            } else {
-                return document.querySelector(el);
-            }
-        };
-
         /**
          * Hero carousel indicators
          */
