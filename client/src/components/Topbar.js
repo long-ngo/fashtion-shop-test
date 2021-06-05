@@ -98,14 +98,13 @@ const Topbar = () => {
             className="d-flex align-items-center fixed-top topbar-transparent"
         >
             <div className="container-fluid container-xl d-flex align-items-center justify-content-center justify-content-lg-start">
+                {/* d-none */}
                 <i className="bi bi-phone d-flex align-items-center">
                     <span>+84 039 406 669</span>
                 </i>
-
-                <i className="bi bi-clock ms-4 d-none d-lg-flex align-items-center">
+                <i className="bi bi-clock ms-4 d-lg-flex align-items-center">
                     <span>
-                        {fomatMonth(date.month)}{" "}
-                        {fomatDay(date.day)}{" "}
+                        {fomatMonth(date.month)} {fomatDay(date.day)}{" "}
                         {date.hours < 12
                             ? `0${date.hours}`
                             : `0${date.hours - 12}`}
