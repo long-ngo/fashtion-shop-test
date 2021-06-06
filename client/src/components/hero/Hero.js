@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import './Hero.css';
 
 const Hero = () => {
     const select = (el, all = false) => {

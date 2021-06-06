@@ -1,3 +1,5 @@
+import './Book.css';
+
 const Book = () => {
     return (
         <section id="book-a-table" className="book-a-table">

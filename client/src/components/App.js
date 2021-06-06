@@ -1,8 +1,9 @@
 //import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Header from './components/Header';
-import Hero from './components/Hero';
-import Main from './components/Main';
-import Footer from './components/Footer';
+import Header from './header/Header';
+import Hero from './hero/Hero';
+import Main from './main/Main';
+import Footer from './footer/Footer';
+import './App.css';
 //import Topbar from './components/Topbar';
 
 // import Products from './components/Products';

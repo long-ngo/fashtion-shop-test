@@ -1,3 +1,5 @@
+import "./About.css";
+
 const About = () => {
     return (
         <section id="about" className="about">
@@ -6,7 +8,7 @@ const About = () => {
                     <div
                         className="col-lg-5 align-items-stretch video-box"
                         style={{
-                            backgroundImage: 'url("assets/img/about.jpg")'
+                            backgroundImage: 'url("assets/img/about.jpg")',
                         }}
                     >
                         <a
@@ -18,12 +20,12 @@ const About = () => {
                     </div>
                     <div
                         className="
-          col-lg-7
-          d-flex
-          flex-column
-          justify-content-center
-          align-items-stretch
-      "
+                            col-lg-7
+                            d-flex
+                            flex-column
+                            justify-content-center
+                            align-items-stretch
+                        "
                     >
                         <div className="content">
                             <h3>

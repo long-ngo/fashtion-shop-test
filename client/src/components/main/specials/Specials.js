@@ -1,3 +1,5 @@
+import './Specials.css';
+
 const Specials = () => {
     return (
         <section id="specials" className="specials">

@@ -1,3 +1,5 @@
+import './Chefs.css';
+
 const Chefs = () => {
     return (
         <section id="chefs" className="chefs">

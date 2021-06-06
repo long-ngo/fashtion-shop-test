@@ -1,4 +1,6 @@
-const UsSection = () => {
+import './WhyUs.css';
+
+const WhyUs = () => {
     return (
         <section id="why-us" className="why-us">
             <div className="container">
@@ -50,4 +52,4 @@ const UsSection = () => {
     );
 };
 
-export default UsSection;
+export default WhyUs;

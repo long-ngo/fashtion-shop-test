@@ -1,3 +1,5 @@
+import './Gallery.css';
+
 const Gallery = () => {
     return (
         <section id="gallery" className="gallery">

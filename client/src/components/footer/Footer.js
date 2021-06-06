@@ -1,8 +1,10 @@
+import './Footer.css';
+
 const Footer = () => {
     return (
         <footer id="footer">
             <div className="container">
-                <h3>Delicious</h3>
+                <h3>Fashtion Shop</h3>
                 <p>
                     Et aut eum quis fuga eos sunt ipsa nihil. Labore corporis
                     magni eligendi fuga maxime saepe commodi placeat.
@@ -27,15 +29,11 @@ const Footer = () => {
                 <div className="copyright">
                     © Copyright{' '}
                     <strong>
-                        <span>Delicious</span>
+                        <span>Fashtion Shop</span>
                     </strong>
                     . All Rights Reserved
                 </div>
                 <div className="credits">
-                    {/* All the links in the footer should remain intact. */}
-                    {/* You can delete the links only if you purchased the pro version. */}
-                    {/* Licensing information: https://bootstrapmade.com/license/ */}
-                    {/* Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/delicious-free-restaurant-bootstrap-theme/ */}
                     Designed by
                     <a href="https://bootstrapmade.com/">BootstrapMade</a>
                 </div>

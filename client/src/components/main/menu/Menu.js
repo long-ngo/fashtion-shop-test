@@ -1,3 +1,5 @@
+import './Menu.css';
+
 const Menu = () => {
     return (
         <section id="menu" className="menu">
