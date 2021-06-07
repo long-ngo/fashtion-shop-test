@@ -1,6 +1,25 @@
-import './Testimonials.css';
+import "./Testimonials.css";
+import Swiper from "swiper";
+import { useEffect } from "react";
 
 const Testimonials = () => {
+    useEffect(() => {
+        new Swiper(".testimonials-slider", {
+            speed: 600,
+            loop: true,
+            autoplay: {
+                delay: 5000,
+                disableOnInteraction: false,
+            },
+            slidesPerView: "auto",
+            pagination: {
+                el: ".swiper-pagination",
+                type: "bullets",
+                clickable: true,
+            },
+        });
+    });
+
     return (
         <section id="testimonials" className="testimonials">
             <div className="container position-relative">
@@ -29,10 +48,10 @@ const Testimonials = () => {
                                 <p>
                                     <i
                                         className="
-                                  bx
-                                  bxs-quote-alt-left
-                                  quote-icon-left
-                              "
+                                        bx
+                                        bxs-quote-alt-left
+                                        quote-icon-left
+                                        "
                                     />
                                     Proin iaculis purus consequat sem cure digni
                                     ssim donec porttitora entum suscipit
@@ -41,10 +60,10 @@ const Testimonials = () => {
                                     risus at semper.
                                     <i
                                         className="
-                                  bx
-                                  bxs-quote-alt-right
-                                  quote-icon-right
-                              "
+                                            bx
+                                            bxs-quote-alt-right
+                                            quote-icon-right
+                                            "
                                     />
                                 </p>
                             </div>

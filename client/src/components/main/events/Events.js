@@ -1,6 +1,22 @@
-import './Events.css';
+import "./Events.css";
+import Swiper from "swiper";
 
 const Events = () => {
+    new Swiper(".events-slider", {
+        speed: 600,
+        loop: true,
+        autoplay: {
+            delay: 5000,
+            disableOnInteraction: false,
+        },
+        slidesPerView: "auto",
+        pagination: {
+            el: ".swiper-pagination",
+            type: "bullets",
+            clickable: true,
+        },
+    });
+
     return (
         <section id="events" className="events">
             <div className="container">

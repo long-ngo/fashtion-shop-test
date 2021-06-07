@@ -1,6 +1,11 @@
-import './Gallery.css';
+import "./Gallery.css";
+import GLightbox from 'glightbox';
 
 const Gallery = () => {
+    const galleryLightbox = GLightbox({
+        selector: ".gallery-lightbox",
+    });
+
     return (
         <section id="gallery" className="gallery">
             <div className="container-fluid">
