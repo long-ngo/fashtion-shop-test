@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import './Topbar.css';
+import "./Topbar.css";
 
 const Topbar = () => {
     const [date, setDate] = useState({});
@@ -106,8 +106,12 @@ const Topbar = () => {
                 <i className="bi bi-clock ms-4 d-lg-flex align-items-center">
                     <span>
                         {fomatMonth(date.month)} {fomatDay(date.day)}{" "}
-                        {date.hours < 12
+                        {date.hours < 1
+                            ? `${date.hours + 12}`
+                            : date.hours < 10
                             ? `0${date.hours}`
+                            : date.hours < 13
+                            ? `${date.hours}`
                             : `0${date.hours - 12}`}
                         :{date.minutes < 10 ? `0${date.minutes}` : date.minutes}
                         :{date.seconds < 10 ? `0${date.seconds}` : date.seconds}{" "}
