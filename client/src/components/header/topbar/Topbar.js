@@ -5,15 +5,15 @@ const Topbar = () => {
     const [date, setDate] = useState({});
 
     const fomatDate = (date) => {
-        const timeObj = {};
-        timeObj.year = date.getFullYear();
-        timeObj.month = date.getMonth();
-        timeObj.date = date.getDate();
-        timeObj.day = date.getDay();
-        timeObj.hours = date.getHours();
-        timeObj.minutes = date.getMinutes();
-        timeObj.seconds = date.getSeconds();
-        return timeObj;
+        const dateObj = {};
+        dateObj.year = date.getFullYear();
+        dateObj.month = date.getMonth();
+        dateObj.date = date.getDate();
+        dateObj.day = date.getDay();
+        dateObj.hours = date.getHours();
+        dateObj.minutes = date.getMinutes();
+        dateObj.seconds = date.getSeconds();
+        return dateObj;
     };
 
     const fomatDay = (day) => {
