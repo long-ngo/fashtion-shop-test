@@ -99,7 +99,10 @@ const Topbar = () => {
             className="d-flex align-items-center fixed-top topbar-transparent"
         >
             <div className="container-fluid container-xl d-flex align-items-center justify-content-center justify-content-lg-start">
-                <i className="bi bi-phone d-flex align-items-center">
+                <i className="bi bi-phone ms-4 d-lg-flex align-items-center d-none">
+                    <span>+84 039 406 669</span>
+                </i>
+                <i className="bi bi-clock d-flex align-items-center ms-3">
                     <span>
                         {fomatMonth(date.month)} {fomatDay(date.day)}{" "}
                         {date.hours < 1
@@ -113,9 +116,6 @@ const Topbar = () => {
                         :{date.seconds < 10 ? `0${date.seconds}` : date.seconds}{" "}
                         {date.hours < 12 ? "AM" : "PM"}
                     </span>
-                </i>
-                <i className="bi bi-clock ms-4 d-lg-flex align-items-center d-none">
-                    <span>+84 039 406 669</span>
                 </i>
             </div>
         </section>
