@@ -36,7 +36,7 @@ const fomatDate = (date) => {
     return `${MONTH[month]} ${DAY[day]} ${hours}:${minutes}:${seconds} ${midday}`;
 };
 
-const Topbar = () => {
+const Topbar = ({ transparent }) => {
     const [date, setDate] = useState('');
 
     useEffect(() => {
@@ -48,7 +48,9 @@ const Topbar = () => {
     return (
         <section
             id="topbar"
-            className="d-flex align-items-center fixed-top topbar-transparent"
+            className={`d-flex align-items-center fixed-top ${
+                transparent && 'topbar-transparent'
+            }`}
         >
             <div className="container-fluid container-xl d-flex align-items-center justify-content-center justify-content-lg-start">
                 <i className="bi bi-phone ms-4 d-lg-flex align-items-center d-none">

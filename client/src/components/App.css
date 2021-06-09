@@ -2,7 +2,7 @@
 # General
 --------------------------------------------------------------*/
 body {
-    font-family: "Poppins", sans-serif;
+    font-family: 'Poppins', sans-serif;
     color: #444444;
 }
 
@@ -22,13 +22,13 @@ h3,
 h4,
 h5,
 h6 {
-    font-family: "Satisfy", sans-serif;
+    font-family: 'Satisfy', sans-serif;
 }
 
 /*--------------------------------------------------------------
   # Back to top button
   --------------------------------------------------------------*/
-.back-to-top {
+  .back-to-top {
     position: fixed;
     visibility: hidden;
     opacity: 0;
