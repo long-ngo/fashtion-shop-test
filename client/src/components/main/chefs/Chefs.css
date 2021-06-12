@@ -2,14 +2,14 @@
 # Chefs
 --------------------------------------------------------------*/
 .chefs {
-    background: url("./img/chefs-bg.jpg") center center no-repeat;
+    background: url('./img/chefs-bg.jpg') center center no-repeat;
     background-size: cover;
     padding: 60px 0;
     position: relative;
 }
 
 .chefs::before {
-    content: "";
+    content: '';
     position: absolute;
     left: 0;
     right: 0;
@@ -54,11 +54,11 @@
     color: #6c665c;
     position: relative;
     padding-bottom: 10px;
-    font-family: "Poppins", sans-serif;
+    font-family: 'Poppins', sans-serif;
 }
 
 .chefs .member h4::after {
-    content: "";
+    content: '';
     position: absolute;
     display: block;
     width: 50px;

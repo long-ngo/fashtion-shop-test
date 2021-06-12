@@ -1,23 +1,30 @@
-import "./Navbar.css";
-import { useEffect, useState } from "react";
+import './Navbar.css';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
     return (
         <nav id="navbar" className="navbar order-last order-lg-0">
             <ul>
                 <li>
-                    <a className="nav-link scrollto active" href="#hero">
+                    {/* <a className="nav-link scrollto active" href="/">
                         Trang chính
-                    </a>
+                    </a> */}
+                    <Link to="/" className="active">
+                        Trang chính
+                    </Link>
                 </li>
                 <li className="dropdown">
-                    <a href="#menu">
+                    {/* <a href="#menu">
                         <span>Sản phẩm</span>
                         <i className="bi bi-chevron-down" />
-                    </a>
+                    </a> */}
+                    <Link to="/products">
+                        <span>Sản phẩm</span>
+                        <i className="bi bi-chevron-down" />
+                    </Link>
                     <ul>
                         <li>
-                            <a href="#">Thời trang nam</a>
+                            <Link to="/products">Thời trang nam</Link>
                         </li>
                         <li className="dropdown">
                             <a href="#menu">

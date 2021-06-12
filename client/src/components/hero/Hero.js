@@ -1,7 +1,7 @@
-import { useEffect } from "react";
-import "./Hero.css";
+import { useEffect } from 'react';
+import './Hero.css';
 
-const Hero = () => {
+const Hero = ({ handleTransparent }) => {
     const select = (el, all = false) => {
         el = el.trim();
         if (all) {
@@ -12,11 +12,15 @@ const Hero = () => {
     };
 
     useEffect(() => {
+        handleTransparent(true);
+    }, []);
+
+    useEffect(() => {
         /**
          * Hero carousel indicators
          */
-        let heroCarouselIndicators = select("#hero-carousel-indicators");
-        let heroCarouselItems = select("#heroCarousel .carousel-item", true);
+        let heroCarouselIndicators = select('#hero-carousel-indicators');
+        let heroCarouselItems = select('#heroCarousel .carousel-item', true);
 
         heroCarouselItems.forEach((item, index) => {
             index === 0
@@ -49,7 +53,7 @@ const Hero = () => {
                         <div
                             className="carousel-item active"
                             style={{
-                                background: "url(assets/img/slide/slide-1.jpg)",
+                                background: 'url(assets/img/slide/slide-1.jpg)',
                             }}
                         >
                             <div className="carousel-container">
@@ -81,7 +85,7 @@ const Hero = () => {
                         <div
                             className="carousel-item"
                             style={{
-                                background: "url(assets/img/slide/slide-2.jpg)",
+                                background: 'url(assets/img/slide/slide-2.jpg)',
                             }}
                         >
                             <div className="carousel-container">
@@ -119,7 +123,7 @@ const Hero = () => {
                         <div
                             className="carousel-item"
                             style={{
-                                background: "url(assets/img/slide/slide-3.jpg)",
+                                background: 'url(assets/img/slide/slide-3.jpg)',
                             }}
                         >
                             <div className="carousel-background">

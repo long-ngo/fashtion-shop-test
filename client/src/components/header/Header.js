@@ -1,6 +1,7 @@
 import Topbar from './topbar/Topbar';
 import Navbar from './navbar/Navbar';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import './Header.css';
 
 const select = (el, all = false) => {
@@ -27,6 +28,17 @@ const onscroll = (el, listener) => {
     el.addEventListener('scroll', listener);
 };
 
+const scrollto = (el) => {
+    let header = select('#header');
+    let offset = header.offsetHeight;
+
+    let elementPos = select(el).offsetTop;
+    window.scrollTo({
+        top: elementPos - offset,
+        behavior: 'smooth',
+    });
+};
+
 const Header = ({ transparent }) => {
     useEffect(() => {
         /**
@@ -51,20 +63,6 @@ const Header = ({ transparent }) => {
         };
         window.addEventListener('load', navbarlinksActive);
         onscroll(document, navbarlinksActive);
-
-        /**
-         * Scrolls to an element with header offset
-         */
-        const scrollto = (el) => {
-            let header = select('#header');
-            let offset = header.offsetHeight;
-
-            let elementPos = select(el).offsetTop;
-            window.scrollTo({
-                top: elementPos - offset,
-                behavior: 'smooth',
-            });
-        };
 
         /**
          * Toggle .header-scrolled class to #header when page is scrolled
@@ -162,31 +160,27 @@ const Header = ({ transparent }) => {
                 }
             }
         });
-    });
+    }, []);
 
     return (
         <>
-            {/* header-transparent */}
             <Topbar transparent={transparent} />
             <header
                 id="header"
-                className={`fixed-top d-flex align-items-center ${
-                    transparent && 'header-transparent'
+                className={`fixed-top d-flex align-items-center${
+                    transparent && ' header-transparent'
                 }`}
             >
                 <div className="container-fluid container-xl d-flex align-items-center justify-content-between">
                     <div className="logo me-auto">
                         <h1>
-                            <a href="index.html">Fashtion Shop</a>
+                            <Link to="/">Fashtion Shop</Link>
                         </h1>
                     </div>
                     <Navbar />
-                    <a
-                        href="#book-a-table"
-                        className="book-a-table-btn scrollto"
-                    >
+                    <Link to="/cart" className="book-a-table-btn">
                         Giỏ hàng
-                    </a>
+                    </Link>
                 </div>
             </header>
         </>

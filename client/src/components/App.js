@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { useState } from 'react';
 import './App.css';
 
 import Header from './header/Header';
@@ -6,15 +7,22 @@ import Hero from './hero/Hero';
 import Main from './main/Main';
 import Footer from './footer/Footer';
 
-import Products from './Products';
+import Products from './products/Products';
+import ProductDetails from './product-details/ProductDetails';
 import About from './main/about/About';
 import Error from './Error';
-import Breadcrumbs from './breadcrumbs/Breadcrumbs';
+import Cart from './cart/Cart';
 
 const App = () => {
+    const [transparent, setTransparent] = useState(true);
+    const handleTransparent = (trans) => {
+        setTransparent(trans);
+    };
+
     return (
         <>
             <Router>
+                <Header transparent={transparent} />
                 <Switch>
                     <Route
                         exact
@@ -22,8 +30,9 @@ const App = () => {
                         component={() => {
                             return (
                                 <>
-                                    <Header transparent={true} />
-                                    <Hero />
+                                    <Hero
+                                        handleTransparent={handleTransparent}
+                                    />
                                     <Main />
                                 </>
                             );
@@ -33,11 +42,19 @@ const App = () => {
                         path="/products"
                         component={() => {
                             return (
-                                <main id="main">
-                                    <Header />
-                                    <Breadcrumbs />
-                                    <Products />
-                                </main>
+                                <Products
+                                    handleTransparent={handleTransparent}
+                                />
+                            );
+                        }}
+                    />
+                    <Route
+                        path="/product-details"
+                        component={() => {
+                            return (
+                                <ProductDetails
+                                    handleTransparent={handleTransparent}
+                                />
                             );
                         }}
                     />
@@ -48,16 +65,14 @@ const App = () => {
                         }}
                     />
                     <Route
-                        path="/:somestring"
+                        path="/cart"
                         component={() => {
                             return (
-                                <main id="main">
-                                    <Breadcrumbs />
-                                    <Error />
-                                </main>
+                                <Cart handleTransparent={handleTransparent} />
                             );
                         }}
                     />
+                    <Route path="/:somestring" component={Error} />
                 </Switch>
             </Router>
             <Footer />
