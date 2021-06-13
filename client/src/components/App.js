@@ -39,20 +39,20 @@ const App = () => {
                         }}
                     />
                     <Route
-                        path="/products"
+                        path="/products/:id"
                         component={() => {
                             return (
-                                <Products
+                                <ProductDetails
                                     handleTransparent={handleTransparent}
                                 />
                             );
                         }}
                     />
                     <Route
-                        path="/product-details"
+                        path="/products"
                         component={() => {
                             return (
-                                <ProductDetails
+                                <Products
                                     handleTransparent={handleTransparent}
                                 />
                             );
@@ -72,7 +72,14 @@ const App = () => {
                             );
                         }}
                     />
-                    <Route path="/:somestring" component={Error} />
+                    <Route
+                        path="/:somestring"
+                        component={() => {
+                            return (
+                                <Error handleTransparent={handleTransparent} />
+                            );
+                        }}
+                    />
                 </Switch>
             </Router>
             <Footer />

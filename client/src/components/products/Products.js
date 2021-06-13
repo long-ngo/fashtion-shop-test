@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
-import { Card, Button, Row, Col, Container } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Breadcrumbs from '../breadcrumbs/Breadcrumbs';
+import './Products.css';
 
 const Products = ({ handleTransparent }) => {
     const [products, setProduct] = useState([]);
@@ -31,37 +32,79 @@ const Products = ({ handleTransparent }) => {
             <Breadcrumbs />
             <section className="inner-page">
                 <div className="container">
-                    <Container>
-                        <Row>
-                            {products.map((product) => {
-                                return (
-                                    <Col key={product._id}>
-                                        <Card style={{ width: '18rem' }}>
-                                            <Card.Img
-                                                variant="top"
-                                                src={product.image}
-                                            />
-                                            <Card.Body>
-                                                <Card.Title>
-                                                    {product.productName}
-                                                </Card.Title>
-                                                <Card.Text>
-                                                    Giá {product.unitPrice}
-                                                </Card.Text>
-                                                <Card.Text>
-                                                    Kho: {product.unitsInStock}{' '}
-                                                    cái
-                                                </Card.Text>
-                                                <Button variant="primary">
-                                                    Thêm vào giỏ
-                                                </Button>
-                                            </Card.Body>
-                                        </Card>
-                                    </Col>
-                                );
-                            })}
-                        </Row>
-                    </Container>
+                    <div className="latest-products">
+                        <div className="container">
+                            <div className="row">
+                                <div className="col-md-12">
+                                    <div className="section-heading">
+                                        <h2>Latest Products</h2>
+                                        <a href="products.html">
+                                            view all products{' '}
+                                            <i className="fa fa-angle-right" />
+                                        </a>
+                                    </div>
+                                </div>
+
+                                {products.map((product) => {
+                                    return (
+                                        <div
+                                            className="col-md-4"
+                                            key={product._id}
+                                        >
+                                            <div className="product-item">
+                                                <a href="#">
+                                                    <img
+                                                        src={product.image}
+                                                        alt={
+                                                            product.productName
+                                                        }
+                                                    />
+                                                </a>
+                                                <div className="down-content">
+                                                    <Link
+                                                        to={`/products/${product._id}`}
+                                                    >
+                                                        <h3>
+                                                            {
+                                                                product.productName
+                                                            }
+                                                        </h3>
+                                                    </Link>
+                                                    <h6>
+                                                        ${product.unitPrice}
+                                                    </h6>
+                                                    <p>
+                                                        Lorem ipsume dolor sit
+                                                        amet, adipisicing elite.
+                                                        Itaque, corporis nulla
+                                                        aspernatur.
+                                                    </p>
+                                                    <ul className="stars">
+                                                        <li>
+                                                            <i className="fa fa-star" />
+                                                        </li>
+                                                        <li>
+                                                            <i className="fa fa-star" />
+                                                        </li>
+                                                        <li>
+                                                            <i className="fa fa-star" />
+                                                        </li>
+                                                        <li>
+                                                            <i className="fa fa-star" />
+                                                        </li>
+                                                        <li>
+                                                            <i className="fa fa-star" />
+                                                        </li>
+                                                    </ul>
+                                                    <span>Reviews (24)</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    );
+                                })}
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </section>
         </main>
