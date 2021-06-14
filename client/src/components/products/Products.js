@@ -55,30 +55,17 @@ const Products = ({ handleTransparent }) => {
                                                 <a href="#">
                                                     <img
                                                         src={product.image}
-                                                        alt={
-                                                            product.productName
-                                                        }
+                                                        alt={product.name}
                                                     />
                                                 </a>
                                                 <div className="down-content">
                                                     <Link
                                                         to={`/products/${product._id}`}
                                                     >
-                                                        <h3>
-                                                            {
-                                                                product.productName
-                                                            }
-                                                        </h3>
+                                                        <h3>{product.name}</h3>
                                                     </Link>
-                                                    <h6>
-                                                        ${product.unitPrice}
-                                                    </h6>
-                                                    <p>
-                                                        Lorem ipsume dolor sit
-                                                        amet, adipisicing elite.
-                                                        Itaque, corporis nulla
-                                                        aspernatur.
-                                                    </p>
+                                                    <h6>${product.price}</h6>
+                                                    <p>{product.description}</p>
                                                     <ul className="stars">
                                                         <li>
                                                             <i className="fa fa-star" />

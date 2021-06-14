@@ -1,10 +1,74 @@
 import Breadcrumbs from '../breadcrumbs/Breadcrumbs';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import './Cart.css';
 
+const cartArr = [
+    {
+        name: 'Áo thun',
+        price: 3900,
+        image: 'https://images.pexels.com/photos/1386604/pexels-photo-1386604.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+        discount: 10,
+        count: 2,
+        description:
+            'Trang phục quen thuộc giản dị nhưng vẫn đẹp và hợp thời trang',
+    },
+    {
+        name: 'Áo hai dây',
+        price: 100,
+        image: 'https://images.pexels.com/photos/1386604/pexels-photo-1386604.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+        discount: 8,
+        count: 3,
+        description:
+            'Còn gì tuyệt vời hơn được diện một chiếc áo hai dây trong những ngày hè oi bức',
+    },
+    {
+        name: 'Áo ba lỗ',
+        price: 110,
+        image: 'https://images.pexels.com/photos/1386604/pexels-photo-1386604.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+        discount: 5,
+        count: 10,
+        description: 'Trang phục phù hợp cho mùa hè',
+    },
+    {
+        name: 'Váy',
+        price: 130,
+        image: 'https://images.pexels.com/photos/1386604/pexels-photo-1386604.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+        discount: 2,
+        count: 20,
+        description: 'Quá quen thuộc với chị em phụ nữ',
+    },
+];
+
+const priceTotal = (carts) => {
+    return carts.reduce((count, cart) => {
+        return count + (cart.price - cart.discount) * cart.count;
+    }, 0);
+};
+
+const countCart = (carts) => {
+    return carts.reduce((count) => {
+        return count + 1;
+    }, 0);
+};
+
 const Cart = ({ handleTransparent }) => {
+    const [carts, setCarts] = useState([]);
+    //localStorage.setItem('carts', JSON.stringify(cartArr));
+
     useEffect(() => {
         handleTransparent(false);
+    }, []);
+
+    useEffect(() => {
+        if (!localStorage.getItem('carts')) {
+            localStorage.setItem('carts', JSON.stringify(carts));
+        }
+
+        setCarts(JSON.parse(localStorage.getItem('carts')));
+
+        return () => {
+            setCarts([]);
+        };
     }, []);
 
     return (
@@ -21,430 +85,108 @@ const Cart = ({ handleTransparent }) => {
                                     <div className="ibox">
                                         <div className="ibox-title">
                                             <span className="pull-right">
-                                                (<strong>5</strong>) items
+                                                (
+                                                <strong>
+                                                    {countCart(carts)}
+                                                </strong>
+                                                ) Sản phẩm
                                             </span>
-                                            <h5>Items in your cart</h5>
+                                            <h5>Trong giỏ hàng của bạn</h5>
                                         </div>
-                                        <div className="ibox-content">
-                                            <div className="table-responsive">
-                                                <table className="table shoping-cart-table">
-                                                    <tbody>
-                                                        <tr>
-                                                            <td width={90}>
-                                                                <div className="cart-product-imitation"></div>
-                                                            </td>
-                                                            <td className="desc">
-                                                                <h3>
-                                                                    <a
-                                                                        href="#"
-                                                                        className="text-navy"
+                                        {carts.map((cart) => {
+                                            return (
+                                                <div className="ibox-content">
+                                                    <div className="table-responsive">
+                                                        <table className="table shoping-cart-table">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td
+                                                                        width={
+                                                                            90
+                                                                        }
                                                                     >
-                                                                        Desktop
-                                                                        publishing
-                                                                        software
-                                                                    </a>
-                                                                </h3>
-                                                                <p className="small">
-                                                                    It is a long
-                                                                    established
-                                                                    fact that a
-                                                                    reader will
-                                                                    be
-                                                                    distracted
-                                                                    by the
-                                                                    readable
-                                                                    content of a
-                                                                    page when
-                                                                    looking at
-                                                                    its layout.
-                                                                    The point of
-                                                                    using Lorem
-                                                                    Ipsum is
-                                                                </p>
-                                                                <dl className="small m-b-none">
-                                                                    <dt>
-                                                                        Description
-                                                                        lists
-                                                                    </dt>
-                                                                    <dd>
-                                                                        A
-                                                                        description
-                                                                        list is
-                                                                        perfect
-                                                                        for
-                                                                        defining
-                                                                        terms.
-                                                                    </dd>
-                                                                </dl>
-                                                                <div className="m-t-sm">
-                                                                    <a
-                                                                        href="#"
-                                                                        className="text-muted"
-                                                                    >
-                                                                        <i className="fa fa-gift" />{' '}
-                                                                        Add gift
-                                                                        package
-                                                                    </a>
-                                                                    |
-                                                                    <a
-                                                                        href="#"
-                                                                        className="text-muted"
-                                                                    >
-                                                                        <i className="fa fa-trash" />{' '}
-                                                                        Remove
-                                                                        item
-                                                                    </a>
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                $180,00
-                                                                <s className="small text-muted">
-                                                                    $230,00
-                                                                </s>
-                                                            </td>
-                                                            <td width={65}>
-                                                                <input
-                                                                    type="text"
-                                                                    className="form-control"
-                                                                    placeholder={
-                                                                        1
-                                                                    }
-                                                                />
-                                                            </td>
-                                                            <td>
-                                                                <h4>$180,00</h4>
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                        <div className="ibox-content">
-                                            <div className="table-responsive">
-                                                <table className="table shoping-cart-table">
-                                                    <tbody>
-                                                        <tr>
-                                                            <td width={90}>
-                                                                <div className="cart-product-imitation"></div>
-                                                            </td>
-                                                            <td className="desc">
-                                                                <h3>
-                                                                    <a
-                                                                        href="#"
-                                                                        className="text-navy"
-                                                                    >
-                                                                        Text
-                                                                        editor
-                                                                    </a>
-                                                                </h3>
-                                                                <p className="small">
-                                                                    There are
-                                                                    many
-                                                                    variations
-                                                                    of passages
-                                                                    of Lorem
-                                                                    Ipsum
-                                                                    available
-                                                                </p>
-                                                                <dl className="small m-b-none">
-                                                                    <dt>
-                                                                        Description
-                                                                        lists
-                                                                    </dt>
-                                                                    <dd>
-                                                                        List is
-                                                                        perfect
-                                                                        for
-                                                                        defining
-                                                                        terms.
-                                                                    </dd>
-                                                                </dl>
-                                                                <div className="m-t-sm">
-                                                                    <a
-                                                                        href="#"
-                                                                        className="text-muted"
-                                                                    >
-                                                                        <i className="fa fa-gift" />{' '}
-                                                                        Add gift
-                                                                        package
-                                                                    </a>
-                                                                    |
-                                                                    <a
-                                                                        href="#"
-                                                                        className="text-muted"
-                                                                    >
-                                                                        <i className="fa fa-trash" />{' '}
-                                                                        Remove
-                                                                        item
-                                                                    </a>
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                $50,00
-                                                                <s className="small text-muted">
-                                                                    $63,00
-                                                                </s>
-                                                            </td>
-                                                            <td width={65}>
-                                                                <input
-                                                                    type="text"
-                                                                    className="form-control"
-                                                                    placeholder={
-                                                                        2
-                                                                    }
-                                                                />
-                                                            </td>
-                                                            <td>
-                                                                <h4>$100,00</h4>
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                        <div className="ibox-content">
-                                            <div className="table-responsive">
-                                                <table className="table shoping-cart-table">
-                                                    <tbody>
-                                                        <tr>
-                                                            <td width={90}>
-                                                                <div className="cart-product-imitation"></div>
-                                                            </td>
-                                                            <td className="desc">
-                                                                <h3>
-                                                                    <a
-                                                                        href="#"
-                                                                        className="text-navy"
-                                                                    >
-                                                                        CRM
-                                                                        software
-                                                                    </a>
-                                                                </h3>
-                                                                <p className="small">
-                                                                    Distracted
-                                                                    by the
-                                                                    readable
-                                                                    content of a
-                                                                    page when
-                                                                    looking at
-                                                                    its layout.
-                                                                    The point of
-                                                                    using Lorem
-                                                                    Ipsum is
-                                                                </p>
-                                                                <dl className="small m-b-none">
-                                                                    <dt>
-                                                                        Description
-                                                                        lists
-                                                                    </dt>
-                                                                    <dd>
-                                                                        A
-                                                                        description
-                                                                        list is
-                                                                        perfect
-                                                                        for
-                                                                        defining
-                                                                        terms.
-                                                                    </dd>
-                                                                </dl>
-                                                                <div className="m-t-sm">
-                                                                    <a
-                                                                        href="#"
-                                                                        className="text-muted"
-                                                                    >
-                                                                        <i className="fa fa-gift" />{' '}
-                                                                        Add gift
-                                                                        package
-                                                                    </a>
-                                                                    |
-                                                                    <a
-                                                                        href="#"
-                                                                        className="text-muted"
-                                                                    >
-                                                                        <i className="fa fa-trash" />{' '}
-                                                                        Remove
-                                                                        item
-                                                                    </a>
-                                                                </div>
-                                                            </td>
-                                                            <td>$110,00</td>
-                                                            <td width={65}>
-                                                                <input
-                                                                    type="text"
-                                                                    className="form-control"
-                                                                    placeholder={
-                                                                        1
-                                                                    }
-                                                                />
-                                                            </td>
-                                                            <td>
-                                                                <h4>$110,00</h4>
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                        <div className="ibox-content">
-                                            <div className="table-responsive">
-                                                <table className="table shoping-cart-table">
-                                                    <tbody>
-                                                        <tr>
-                                                            <td width={90}>
-                                                                <div className="cart-product-imitation"></div>
-                                                            </td>
-                                                            <td className="desc">
-                                                                <h3>
-                                                                    <a
-                                                                        href="#"
-                                                                        className="text-navy"
-                                                                    >
-                                                                        PM
-                                                                        software
-                                                                    </a>
-                                                                </h3>
-                                                                <p className="small">
-                                                                    Readable
-                                                                    content of a
-                                                                    page when
-                                                                    looking at
-                                                                    its layout.
-                                                                    The point of
-                                                                    using Lorem
-                                                                    Ipsum is
-                                                                </p>
-                                                                <dl className="small m-b-none">
-                                                                    <dt>
-                                                                        Description
-                                                                        lists
-                                                                    </dt>
-                                                                    <dd>
-                                                                        A
-                                                                        description
-                                                                        list is
-                                                                        perfect
-                                                                        for
-                                                                        defining
-                                                                        terms.
-                                                                    </dd>
-                                                                </dl>
-                                                                <div className="m-t-sm">
-                                                                    <a
-                                                                        href="#"
-                                                                        className="text-muted"
-                                                                    >
-                                                                        <i className="fa fa-gift" />{' '}
-                                                                        Add gift
-                                                                        package
-                                                                    </a>
-                                                                    |
-                                                                    <a
-                                                                        href="#"
-                                                                        className="text-muted"
-                                                                    >
-                                                                        <i className="fa fa-trash" />{' '}
-                                                                        Remove
-                                                                        item
-                                                                    </a>
-                                                                </div>
-                                                            </td>
-                                                            <td>$130,00</td>
-                                                            <td width={65}>
-                                                                <input
-                                                                    type="text"
-                                                                    className="form-control"
-                                                                    placeholder={
-                                                                        1
-                                                                    }
-                                                                />
-                                                            </td>
-                                                            <td>
-                                                                <h4>$130,00</h4>
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                        <div className="ibox-content">
-                                            <div className="table-responsive">
-                                                <table className="table shoping-cart-table">
-                                                    <tbody>
-                                                        <tr>
-                                                            <td width={90}>
-                                                                <div className="cart-product-imitation"></div>
-                                                            </td>
-                                                            <td className="desc">
-                                                                <h3>
-                                                                    <a
-                                                                        href="#"
-                                                                        className="text-navy"
-                                                                    >
-                                                                        Photo
-                                                                        editor
-                                                                    </a>
-                                                                </h3>
-                                                                <p className="small">
-                                                                    Page when
-                                                                    looking at
-                                                                    its layout.
-                                                                    The point of
-                                                                    using Lorem
-                                                                    Ipsum is
-                                                                </p>
-                                                                <dl className="small m-b-none">
-                                                                    <dt>
-                                                                        Description
-                                                                        lists
-                                                                    </dt>
-                                                                    <dd>
-                                                                        A
-                                                                        description
-                                                                        list is
-                                                                        perfect
-                                                                        for
-                                                                        defining
-                                                                        terms.
-                                                                    </dd>
-                                                                </dl>
-                                                                <div className="m-t-sm">
-                                                                    <a
-                                                                        href="#"
-                                                                        className="text-muted"
-                                                                    >
-                                                                        <i className="fa fa-gift" />{' '}
-                                                                        Add gift
-                                                                        package
-                                                                    </a>
-                                                                    |
-                                                                    <a
-                                                                        href="#"
-                                                                        className="text-muted"
-                                                                    >
-                                                                        <i className="fa fa-trash" />{' '}
-                                                                        Remove
-                                                                        item
-                                                                    </a>
-                                                                </div>
-                                                            </td>
-                                                            <td>$700,00</td>
-                                                            <td width={65}>
-                                                                <input
-                                                                    type="text"
-                                                                    className="form-control"
-                                                                    placeholder={
-                                                                        1
-                                                                    }
-                                                                />
-                                                            </td>
-                                                            <td>
-                                                                <h4>$70,00</h4>
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
+                                                                        <div className="cart-product-imitation">
+                                                                            <img
+                                                                                src={
+                                                                                    cart.image
+                                                                                }
+                                                                                style={{
+                                                                                    width: '100%',
+                                                                                    height: '100%',
+                                                                                    objectFit:
+                                                                                        'cover',
+                                                                                }}
+                                                                            />
+                                                                        </div>
+                                                                    </td>
+                                                                    <td className="desc">
+                                                                        <h3>
+                                                                            <a
+                                                                                href="#"
+                                                                                className="text-navy"
+                                                                            >
+                                                                                {
+                                                                                    cart.name
+                                                                                }
+                                                                            </a>
+                                                                        </h3>
+                                                                        <p className="small">
+                                                                            {
+                                                                                cart.description
+                                                                            }
+                                                                        </p>
+                                                                    </td>
+                                                                    <td>
+                                                                        $
+                                                                        {cart.price -
+                                                                            cart.discount}
+                                                                        <s className="small text-muted">
+                                                                            $
+                                                                            {
+                                                                                cart.price
+                                                                            }
+                                                                        </s>
+                                                                    </td>
+                                                                    <td className="cart-count">
+                                                                        <input
+                                                                            type="text"
+                                                                            className="form-control"
+                                                                            placeholder={
+                                                                                cart.count
+                                                                            }
+                                                                        />
+                                                                    </td>
+                                                                    <td>
+                                                                        <h4>
+                                                                            $
+                                                                            {(cart.price -
+                                                                                cart.discount) *
+                                                                                cart.count}
+                                                                        </h4>
+                                                                    </td>
+                                                                    <td className="cart-edit">
+                                                                        <a
+                                                                            href="#"
+                                                                            className="text-muted"
+                                                                        >
+                                                                            <i className="fas fa-edit"></i>
+                                                                        </a>
+                                                                    </td>
+                                                                    <td>
+                                                                        <a
+                                                                            href="#"
+                                                                            className="text-muted"
+                                                                        >
+                                                                            <i className="fa fa-trash" />
+                                                                        </a>
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            );
+                                        })}
                                         <div className="ibox-content">
                                             <button className="btn btn-primary pull-right">
                                                 <i className="fa fa fa-shopping-cart" />{' '}
@@ -460,12 +202,12 @@ const Cart = ({ handleTransparent }) => {
                                 <div className="col-md-3">
                                     <div className="ibox">
                                         <div className="ibox-title">
-                                            <h5>Cart Summary</h5>
+                                            <h5>Chi tiết giỏ hàng</h5>
                                         </div>
                                         <div className="ibox-content">
-                                            <span>Total</span>
+                                            <span>Tổng cộng</span>
                                             <h2 className="font-bold">
-                                                $390,00
+                                                ${priceTotal(carts)}
                                             </h2>
                                             <hr />
                                             <span className="text-muted small">

@@ -4,6 +4,17 @@ import './ProductDetails.css';
 import Breadcrumbs from '../breadcrumbs/Breadcrumbs';
 import { useParams } from 'react-router-dom';
 
+const addToCart = (product) => {
+    if (!localStorage.getItem('carts')) {
+        localStorage.setItem('carts', '[]');
+    }
+
+    product[0].count = 10;
+
+    let products = [...JSON.parse(localStorage.getItem('carts')), ...product];
+    localStorage.setItem('carts', JSON.stringify(products));
+};
+
 const ProductDetails = ({ handleTransparent }) => {
     const [products, setProducts] = useState([]);
     let { id } = useParams();
@@ -33,12 +44,13 @@ const ProductDetails = ({ handleTransparent }) => {
             <Breadcrumbs />
             <section className="inner-page">
                 <div className="container">
-                    {products.map((product) => {
-                        return (
-                            <main className="product-details_container">
-                                {/* Left Column / Headphones Image */}
-                                <div className="left-column">
-                                    <img
+                    <div className="row">
+                        {products.map((product) => {
+                            return (
+                                <>
+                                    {/* Left Column / Headphones Image */}
+                                    <div className="left-column">
+                                        {/* <img
                                         data-image="black"
                                         src={product.image}
                                         alt={product.productName}
@@ -47,99 +59,101 @@ const ProductDetails = ({ handleTransparent }) => {
                                         data-image="blue"
                                         src={product.image}
                                         alt={product.productName}
-                                    />
-                                    <img
-                                        data-image="red"
-                                        className="active"
-                                        src={product.image}
-                                        alt={product.productName}
-                                    />
-                                </div>
-                                {/* Right Column */}
-                                <div className="right-column">
-                                    {/* Product Description */}
-                                    <div className="product-description">
-                                        <span>abc</span>
-                                        <h1>{product.productName}</h1>
-                                        <p>
-                                            The preferred choice of a vast range
-                                            of acclaimed DJs. Punchy,
-                                            bass-focused sound and high
-                                            isolation. Sturdy headband and
-                                            on-ear cushions suitable for live
-                                            performance
-                                        </p>
+                                    /> */}
+                                        <img
+                                            data-image="red"
+                                            className="active"
+                                            src={product.image}
+                                            alt={product.productName}
+                                        />
                                     </div>
-                                    {/* Product Configuration */}
-                                    <div className="product-configuration">
-                                        {/* Product Color */}
-                                        <div className="product-color">
-                                            <span>Color</span>
-                                            <div className="color-choose">
-                                                <div>
-                                                    <input
-                                                        data-image="red"
-                                                        type="radio"
-                                                        id="red"
-                                                        name="color"
-                                                        defaultValue="red"
-                                                        defaultChecked
-                                                    />
-                                                    <label htmlFor="red">
-                                                        <span />
-                                                    </label>
-                                                </div>
-                                                <div>
-                                                    <input
-                                                        data-image="blue"
-                                                        type="radio"
-                                                        id="blue"
-                                                        name="color"
-                                                        defaultValue="blue"
-                                                    />
-                                                    <label htmlFor="blue">
-                                                        <span />
-                                                    </label>
-                                                </div>
-                                                <div>
-                                                    <input
-                                                        data-image="black"
-                                                        type="radio"
-                                                        id="black"
-                                                        name="color"
-                                                        defaultValue="black"
-                                                    />
-                                                    <label htmlFor="black">
-                                                        <span />
-                                                    </label>
+                                    {/* Right Column */}
+                                    <div className="right-column">
+                                        {/* Product Description */}
+                                        <div className="product-description">
+                                            <span>Thời trang nữ</span>
+                                            <h1>{product.name}</h1>
+                                            <p>{product.description}</p>
+                                        </div>
+                                        {/* Product Configuration */}
+                                        <div className="product-configuration">
+                                            {/* Product Color */}
+                                            <div className="product-color">
+                                                <span>Color</span>
+                                                <div className="color-choose">
+                                                    <div>
+                                                        <input
+                                                            data-image="red"
+                                                            type="radio"
+                                                            id="red"
+                                                            name="color"
+                                                            defaultValue="red"
+                                                            defaultChecked
+                                                        />
+                                                        <label htmlFor="red">
+                                                            <span />
+                                                        </label>
+                                                    </div>
+                                                    <div>
+                                                        <input
+                                                            data-image="blue"
+                                                            type="radio"
+                                                            id="blue"
+                                                            name="color"
+                                                            defaultValue="blue"
+                                                        />
+                                                        <label htmlFor="blue">
+                                                            <span />
+                                                        </label>
+                                                    </div>
+                                                    <div>
+                                                        <input
+                                                            data-image="black"
+                                                            type="radio"
+                                                            id="black"
+                                                            name="color"
+                                                            defaultValue="black"
+                                                        />
+                                                        <label htmlFor="black">
+                                                            <span />
+                                                        </label>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        {/* Cable Configuration */}
-                                        <div className="cable-config">
-                                            <span>Cable configuration</span>
-                                            <div className="cable-choose">
-                                                <button>Straight</button>
-                                                <button>Coiled</button>
-                                                <button>Long-coiled</button>
+                                            {/* Cable Configuration */}
+                                            <div className="cable-config">
+                                                <span>Cable configuration</span>
+                                                <div className="cable-choose">
+                                                    <button>Straight</button>
+                                                    <button>Coiled</button>
+                                                    <button>Long-coiled</button>
+                                                </div>
+                                                <a href="#">
+                                                    How to configurate your
+                                                    headphones
+                                                </a>
                                             </div>
-                                            <a href="#">
-                                                How to configurate your
-                                                headphones
-                                            </a>
+                                        </div>
+                                        {/* Product Pricing */}
+                                        <div className="product-price">
+                                            <span>{product.price}$</span>
+                                            {/* <a href="#" className="cart-btn">
+                                                Thêm vào giỏ
+                                            </a> */}
+                                            <button
+                                                className="cart-btn"
+                                                onClick={() =>
+                                                    addToCart(products)
+                                                }
+                                            >
+                                                Thêm vào giỏ
+                                            </button>
                                         </div>
                                     </div>
-                                    {/* Product Pricing */}
-                                    <div className="product-price">
-                                        <span>{product.unitPrice}$</span>
-                                        <a href="#" className="cart-btn">
-                                            Add to cart
-                                        </a>
-                                    </div>
-                                </div>
-                            </main>
-                        );
-                    })}
+                                </>
+                            );
+                        })}
+                    </div>
                 </div>
             </section>
         </main>

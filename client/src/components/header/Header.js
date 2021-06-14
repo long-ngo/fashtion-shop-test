@@ -179,7 +179,14 @@ const Header = ({ transparent }) => {
                     </div>
                     <Navbar />
                     <Link to="/cart" className="book-a-table-btn">
-                        Giỏ hàng
+                        Giỏ hàng{' '}
+                        <span class="badge bg-warning">
+                            {localStorage.getItem('carts')
+                                ? JSON.parse(
+                                      localStorage.getItem('carts')
+                                  ).reduce((count) => count + 1, 0)
+                                : ''}
+                        </span>
                     </Link>
                 </div>
             </header>

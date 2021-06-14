@@ -1,19 +1,21 @@
-.product-details_container {
-    max-width: 1200px;
+.row {
+    /* max-width: 1200px;
     margin: 0 auto;
-    padding: 15px;
+    padding: 15px; */
     display: flex;
+    margin: 0 auto;
 }
 
 /* Columns */
 .left-column {
-    width: 65%;
+    width: 50%;
     position: relative;
 }
 
 .right-column {
-    width: 35%;
-    margin-top: 60px;
+    width: 50%;
+    /* margin-top: 60px; */
+    padding-left: 50px;
 }
 
 /* Left Column */
@@ -176,6 +178,7 @@
 .cart-btn {
     display: inline-block;
     background-color: #7dc855;
+    border: none;
     border-radius: 6px;
     font-size: 16px;
     color: #ffffff;
@@ -189,7 +192,7 @@
 
 /* Responsive */
 @media (max-width: 940px) {
-    .container {
+    .row {
         flex-direction: column;
         margin-top: 60px;
     }
