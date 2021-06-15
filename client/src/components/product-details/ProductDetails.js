@@ -4,17 +4,6 @@ import './ProductDetails.css';
 import Breadcrumbs from '../breadcrumbs/Breadcrumbs';
 import { useParams } from 'react-router-dom';
 
-const addToCart = (product) => {
-    if (!localStorage.getItem('carts')) {
-        localStorage.setItem('carts', '[]');
-    }
-
-    product[0].count = 10;
-
-    let products = [...JSON.parse(localStorage.getItem('carts')), ...product];
-    localStorage.setItem('carts', JSON.stringify(products));
-};
-
 const ProductDetails = ({ handleTransparent }) => {
     const [products, setProducts] = useState([]);
     let { id } = useParams();
@@ -38,6 +27,36 @@ const ProductDetails = ({ handleTransparent }) => {
             .catch((err) => console.log(err));
         return () => setProducts([]);
     }, []);
+
+    const addToCart = (product) => {
+        if (!localStorage.getItem('carts')) {
+            localStorage.setItem('carts', '[]');
+        }
+
+        //hash code
+        product.count = 1;
+
+        let carts = JSON.parse(localStorage.getItem('carts'));
+        let flag = false;
+
+        carts = carts.map((cart) => {
+            if (cart._id === product._id) {
+                cart.count += product.count;
+                flag = true;
+            }
+            return cart;
+        });
+
+        let products = [];
+
+        if (flag) {
+            products = [...carts];
+        } else {
+            products = [...carts, product];
+        }
+
+        localStorage.setItem('carts', JSON.stringify(products));
+    };
 
     return (
         <main id="main">
@@ -143,7 +162,7 @@ const ProductDetails = ({ handleTransparent }) => {
                                             <button
                                                 className="cart-btn"
                                                 onClick={() =>
-                                                    addToCart(products)
+                                                    addToCart(product)
                                                 }
                                             >
                                                 Thêm vào giỏ

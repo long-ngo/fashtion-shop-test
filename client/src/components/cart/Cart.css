@@ -10,10 +10,7 @@
 .product-imitation.xl {
     padding: 120px 0;
 }
-.product-desc {
-    padding: 20px;
-    position: relative;
-}
+
 .ecommerce .tag-list {
     padding: 0;
 }
@@ -39,7 +36,7 @@ table.shoping-cart-table tr td:first-child {
     text-align: left;
 }
 table.shoping-cart-table tr td:last-child {
-    width: 10%;
+    width: 80px;
 }
 
 .desc {
@@ -47,7 +44,7 @@ table.shoping-cart-table tr td:last-child {
 }
 
 .cart-count {
-    width: 80px;
+    width: 100px;
 }
 
 .ibox {

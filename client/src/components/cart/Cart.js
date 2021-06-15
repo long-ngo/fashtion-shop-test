@@ -1,43 +1,45 @@
 import Breadcrumbs from '../breadcrumbs/Breadcrumbs';
 import { useEffect, useState } from 'react';
 import './Cart.css';
+import { Link } from 'react-router-dom';
+import { Button } from 'react-bootstrap';
 
-const cartArr = [
-    {
-        name: 'Áo thun',
-        price: 3900,
-        image: 'https://images.pexels.com/photos/1386604/pexels-photo-1386604.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
-        discount: 10,
-        count: 2,
-        description:
-            'Trang phục quen thuộc giản dị nhưng vẫn đẹp và hợp thời trang',
-    },
-    {
-        name: 'Áo hai dây',
-        price: 100,
-        image: 'https://images.pexels.com/photos/1386604/pexels-photo-1386604.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
-        discount: 8,
-        count: 3,
-        description:
-            'Còn gì tuyệt vời hơn được diện một chiếc áo hai dây trong những ngày hè oi bức',
-    },
-    {
-        name: 'Áo ba lỗ',
-        price: 110,
-        image: 'https://images.pexels.com/photos/1386604/pexels-photo-1386604.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
-        discount: 5,
-        count: 10,
-        description: 'Trang phục phù hợp cho mùa hè',
-    },
-    {
-        name: 'Váy',
-        price: 130,
-        image: 'https://images.pexels.com/photos/1386604/pexels-photo-1386604.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
-        discount: 2,
-        count: 20,
-        description: 'Quá quen thuộc với chị em phụ nữ',
-    },
-];
+// const cartArr = [
+//     {
+//         name: 'Áo thun',
+//         price: 3900,
+//         image: 'https://images.pexels.com/photos/1386604/pexels-photo-1386604.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+//         discount: 10,
+//         count: 2,
+//         description:
+//             'Trang phục quen thuộc giản dị nhưng vẫn đẹp và hợp thời trang',
+//     },
+//     {
+//         name: 'Áo hai dây',
+//         price: 100,
+//         image: 'https://images.pexels.com/photos/1386604/pexels-photo-1386604.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+//         discount: 8,
+//         count: 3,
+//         description:
+//             'Còn gì tuyệt vời hơn được diện một chiếc áo hai dây trong những ngày hè oi bức',
+//     },
+//     {
+//         name: 'Áo ba lỗ',
+//         price: 110,
+//         image: 'https://images.pexels.com/photos/1386604/pexels-photo-1386604.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+//         discount: 5,
+//         count: 10,
+//         description: 'Trang phục phù hợp cho mùa hè',
+//     },
+//     {
+//         name: 'Váy',
+//         price: 130,
+//         image: 'https://images.pexels.com/photos/1386604/pexels-photo-1386604.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+//         discount: 2,
+//         count: 20,
+//         description: 'Quá quen thuộc với chị em phụ nữ',
+//     },
+// ];
 
 const priceTotal = (carts) => {
     return carts.reduce((count, cart) => {
@@ -54,6 +56,12 @@ const countCart = (carts) => {
 const Cart = ({ handleTransparent }) => {
     const [carts, setCarts] = useState([]);
     //localStorage.setItem('carts', JSON.stringify(cartArr));
+
+    const deleteCartById = (id) => {
+        const newCart = carts.filter((cart) => cart._id !== id);
+        setCarts(newCart);
+        localStorage.setItem('carts', JSON.stringify(newCart));
+    };
 
     useEffect(() => {
         handleTransparent(false);
@@ -78,232 +86,229 @@ const Cart = ({ handleTransparent }) => {
                 <div className="container">
                     <h3>Cart</h3>
 
-                    <div className="container">
-                        <div className="wrapper wrapper-content animated fadeInRight">
-                            <div className="row">
-                                <div className="col-md-9">
-                                    <div className="ibox">
-                                        <div className="ibox-title">
-                                            <span className="pull-right">
-                                                (
-                                                <strong>
-                                                    {countCart(carts)}
-                                                </strong>
-                                                ) Sản phẩm
-                                            </span>
-                                            <h5>Trong giỏ hàng của bạn</h5>
-                                        </div>
-                                        {carts.map((cart) => {
-                                            return (
-                                                <div className="ibox-content">
-                                                    <div className="table-responsive">
-                                                        <table className="table shoping-cart-table">
-                                                            <tbody>
-                                                                <tr>
-                                                                    <td
-                                                                        width={
-                                                                            90
-                                                                        }
-                                                                    >
-                                                                        <div className="cart-product-imitation">
-                                                                            <img
-                                                                                src={
-                                                                                    cart.image
-                                                                                }
-                                                                                style={{
-                                                                                    width: '100%',
-                                                                                    height: '100%',
-                                                                                    objectFit:
-                                                                                        'cover',
-                                                                                }}
-                                                                            />
-                                                                        </div>
-                                                                    </td>
-                                                                    <td className="desc">
-                                                                        <h3>
-                                                                            <a
-                                                                                href="#"
-                                                                                className="text-navy"
-                                                                            >
-                                                                                {
-                                                                                    cart.name
-                                                                                }
-                                                                            </a>
-                                                                        </h3>
-                                                                        <p className="small">
-                                                                            {
-                                                                                cart.description
+                    <div className="wrapper wrapper-content animated fadeInRight">
+                        <div className="row">
+                            <div className="col-md-9">
+                                <div className="ibox">
+                                    <div className="ibox-title">
+                                        <span className="pull-right">
+                                            (<strong>{countCart(carts)}</strong>
+                                            ) Sản phẩm
+                                        </span>
+                                        <h5>Trong giỏ hàng của bạn</h5>
+                                    </div>
+                                    {carts.map((cart) => {
+                                        return (
+                                            <div
+                                                className="ibox-content"
+                                                key={cart._id}
+                                            >
+                                                <div className="table-responsive">
+                                                    <table className="table shoping-cart-table">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>
+                                                                    <div className="cart-product-imitation">
+                                                                        <img
+                                                                            src={
+                                                                                cart.image
                                                                             }
-                                                                        </p>
-                                                                    </td>
-                                                                    <td>
-                                                                        $
-                                                                        {cart.price -
-                                                                            cart.discount}
-                                                                        <s className="small text-muted">
-                                                                            $
-                                                                            {
-                                                                                cart.price
-                                                                            }
-                                                                        </s>
-                                                                    </td>
-                                                                    <td className="cart-count">
-                                                                        <input
-                                                                            type="text"
-                                                                            className="form-control"
-                                                                            placeholder={
-                                                                                cart.count
-                                                                            }
+                                                                            style={{
+                                                                                width: '100%',
+                                                                                height: '100%',
+                                                                                objectFit:
+                                                                                    'cover',
+                                                                            }}
                                                                         />
-                                                                    </td>
-                                                                    <td>
-                                                                        <h4>
-                                                                            $
-                                                                            {(cart.price -
-                                                                                cart.discount) *
-                                                                                cart.count}
-                                                                        </h4>
-                                                                    </td>
-                                                                    <td className="cart-edit">
+                                                                    </div>
+                                                                </td>
+                                                                <td className="desc">
+                                                                    <h3>
                                                                         <a
                                                                             href="#"
-                                                                            className="text-muted"
+                                                                            className="text-navy"
                                                                         >
-                                                                            <i className="fas fa-edit"></i>
+                                                                            {
+                                                                                cart.name
+                                                                            }
                                                                         </a>
-                                                                    </td>
-                                                                    <td>
-                                                                        <a
-                                                                            href="#"
-                                                                            className="text-muted"
-                                                                        >
-                                                                            <i className="fa fa-trash" />
-                                                                        </a>
-                                                                    </td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
+                                                                    </h3>
+                                                                    <p className="small">
+                                                                        {
+                                                                            cart.description
+                                                                        }
+                                                                    </p>
+                                                                </td>
+                                                                <td>
+                                                                    $
+                                                                    {cart.price -
+                                                                        cart.discount}
+                                                                    <br />
+                                                                    <s className="small text-muted">
+                                                                        $
+                                                                        {
+                                                                            cart.price
+                                                                        }
+                                                                    </s>
+                                                                </td>
+                                                                <td className="cart-count">
+                                                                    <input
+                                                                        type="number"
+                                                                        min="1"
+                                                                        max="100"
+                                                                        className="form-control"
+                                                                        placeholder={
+                                                                            cart.count
+                                                                        }
+                                                                    />
+                                                                </td>
+                                                                <td>
+                                                                    <h4>
+                                                                        $
+                                                                        {(cart.price -
+                                                                            cart.discount) *
+                                                                            cart.count}
+                                                                    </h4>
+                                                                </td>
+                                                                <td className="cart-edit">
+                                                                    <a className="text-muted btn">
+                                                                        <i className="fas fa-edit"></i>
+                                                                    </a>
+                                                                </td>
+                                                                <td>
+                                                                    <a
+                                                                        className="text-muted btn"
+                                                                        onClick={() => {
+                                                                            deleteCartById(
+                                                                                cart._id
+                                                                            );
+                                                                        }}
+                                                                    >
+                                                                        <i className="fa fa-trash" />
+                                                                    </a>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
                                                 </div>
-                                            );
-                                        })}
-                                        <div className="ibox-content">
-                                            <button className="btn btn-primary pull-right">
-                                                <i className="fa fa fa-shopping-cart" />{' '}
-                                                Checkout
-                                            </button>
-                                            <button className="btn btn-white">
-                                                <i className="fa fa-arrow-left" />{' '}
-                                                Continue shopping
-                                            </button>
+                                            </div>
+                                        );
+                                    })}
+                                    <div className="ibox-content">
+                                        <button className="btn btn-primary pull-right">
+                                            <i className="fa fa fa-shopping-cart" />{' '}
+                                            Checkout
+                                        </button>
+                                        <Link
+                                            className="btn btn-white"
+                                            to="/products"
+                                        >
+                                            <i className="fa fa-arrow-left" />{' '}
+                                            Continue shopping
+                                        </Link>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="col-md-3">
+                                <div className="ibox">
+                                    <div className="ibox-title">
+                                        <h5>Chi tiết giỏ hàng</h5>
+                                    </div>
+                                    <div className="ibox-content">
+                                        <span>Tổng cộng</span>
+                                        <h2 className="font-bold">
+                                            ${priceTotal(carts)}
+                                        </h2>
+                                        <hr />
+                                        <span className="text-muted small">
+                                            *For United States, France and
+                                            Germany applicable sales tax will be
+                                            applied
+                                        </span>
+                                        <div className="m-t-sm">
+                                            <div className="btn-group">
+                                                <a
+                                                    href="#"
+                                                    className="btn btn-primary btn-sm"
+                                                >
+                                                    <i className="fa fa-shopping-cart" />{' '}
+                                                    Checkout
+                                                </a>
+                                                <a
+                                                    href="#"
+                                                    className="btn btn-white btn-sm"
+                                                >
+                                                    {' '}
+                                                    Cancel
+                                                </a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div className="col-md-3">
-                                    <div className="ibox">
-                                        <div className="ibox-title">
-                                            <h5>Chi tiết giỏ hàng</h5>
-                                        </div>
-                                        <div className="ibox-content">
-                                            <span>Tổng cộng</span>
-                                            <h2 className="font-bold">
-                                                ${priceTotal(carts)}
-                                            </h2>
-                                            <hr />
-                                            <span className="text-muted small">
-                                                *For United States, France and
-                                                Germany applicable sales tax
-                                                will be applied
-                                            </span>
-                                            <div className="m-t-sm">
-                                                <div className="btn-group">
-                                                    <a
-                                                        href="#"
-                                                        className="btn btn-primary btn-sm"
-                                                    >
-                                                        <i className="fa fa-shopping-cart" />{' '}
-                                                        Checkout
-                                                    </a>
-                                                    <a
-                                                        href="#"
-                                                        className="btn btn-white btn-sm"
-                                                    >
-                                                        {' '}
-                                                        Cancel
-                                                    </a>
-                                                </div>
+                                <div className="ibox">
+                                    <div className="ibox-title">
+                                        <h5>Support</h5>
+                                    </div>
+                                    <div className="ibox-content text-center">
+                                        <h3>
+                                            <i className="fa fa-phone" /> +43
+                                            100 783 001
+                                        </h3>
+                                        <span className="small">
+                                            Please contact with us if you have
+                                            any questions. We are avalible 24h.
+                                        </span>
+                                    </div>
+                                </div>
+                                <div className="ibox">
+                                    <div className="ibox-content">
+                                        <p className="font-bold">
+                                            Other products you may be interested
+                                        </p>
+                                        <hr />
+                                        <div>
+                                            <a
+                                                href="#"
+                                                className="product-name"
+                                            >
+                                                {' '}
+                                                Product 1
+                                            </a>
+                                            <div className="small m-t-xs">
+                                                Many desktop publishing packages
+                                                and web page editors now.
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div className="ibox">
-                                        <div className="ibox-title">
-                                            <h5>Support</h5>
-                                        </div>
-                                        <div className="ibox-content text-center">
-                                            <h3>
-                                                <i className="fa fa-phone" />{' '}
-                                                +43 100 783 001
-                                            </h3>
-                                            <span className="small">
-                                                Please contact with us if you
-                                                have any questions. We are
-                                                avalible 24h.
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div className="ibox">
-                                        <div className="ibox-content">
-                                            <p className="font-bold">
-                                                Other products you may be
-                                                interested
-                                            </p>
-                                            <hr />
-                                            <div>
+                                            <div className="m-t text-righ">
                                                 <a
                                                     href="#"
-                                                    className="product-name"
+                                                    className="btn btn-xs btn-outline btn-primary"
                                                 >
-                                                    {' '}
-                                                    Product 1
+                                                    Info{' '}
+                                                    <i className="fa fa-long-arrow-right" />{' '}
                                                 </a>
-                                                <div className="small m-t-xs">
-                                                    Many desktop publishing
-                                                    packages and web page
-                                                    editors now.
-                                                </div>
-                                                <div className="m-t text-righ">
-                                                    <a
-                                                        href="#"
-                                                        className="btn btn-xs btn-outline btn-primary"
-                                                    >
-                                                        Info{' '}
-                                                        <i className="fa fa-long-arrow-right" />{' '}
-                                                    </a>
-                                                </div>
                                             </div>
-                                            <hr />
-                                            <div>
+                                        </div>
+                                        <hr />
+                                        <div>
+                                            <a
+                                                href="#"
+                                                className="product-name"
+                                            >
+                                                {' '}
+                                                Product 2
+                                            </a>
+                                            <div className="small m-t-xs">
+                                                Many desktop publishing packages
+                                                and web page editors now.
+                                            </div>
+                                            <div className="m-t text-righ">
                                                 <a
                                                     href="#"
-                                                    className="product-name"
+                                                    className="btn btn-xs btn-outline btn-primary"
                                                 >
-                                                    {' '}
-                                                    Product 2
+                                                    Info{' '}
+                                                    <i className="fa fa-long-arrow-right" />{' '}
                                                 </a>
-                                                <div className="small m-t-xs">
-                                                    Many desktop publishing
-                                                    packages and web page
-                                                    editors now.
-                                                </div>
-                                                <div className="m-t text-righ">
-                                                    <a
-                                                        href="#"
-                                                        className="btn btn-xs btn-outline btn-primary"
-                                                    >
-                                                        Info{' '}
-                                                        <i className="fa fa-long-arrow-right" />{' '}
-                                                    </a>
-                                                </div>
                                             </div>
                                         </div>
                                     </div>

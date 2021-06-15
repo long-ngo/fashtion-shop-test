@@ -1,6 +1,6 @@
 import Topbar from './topbar/Topbar';
 import Navbar from './navbar/Navbar';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Header.css';
 
@@ -40,6 +40,8 @@ const scrollto = (el) => {
 };
 
 const Header = ({ transparent }) => {
+    const [count, setCount] = useState(0);
+
     useEffect(() => {
         /**
          * Navbar links active state on scroll
@@ -162,6 +164,13 @@ const Header = ({ transparent }) => {
         });
     }, []);
 
+    useEffect(() => {
+        const carts = JSON.parse(localStorage.getItem('carts'));
+        if (carts) {
+            setCount(carts.reduce((count) => count + 1, 0));
+        }
+    }, []);
+
     return (
         <>
             <Topbar transparent={transparent} />
@@ -179,14 +188,7 @@ const Header = ({ transparent }) => {
                     </div>
                     <Navbar />
                     <Link to="/cart" className="book-a-table-btn">
-                        Giỏ hàng{' '}
-                        <span class="badge bg-warning">
-                            {localStorage.getItem('carts')
-                                ? JSON.parse(
-                                      localStorage.getItem('carts')
-                                  ).reduce((count) => count + 1, 0)
-                                : ''}
-                        </span>
+                        Giỏ hàng <span class="badge bg-warning">{count}</span>
                     </Link>
                 </div>
             </header>
