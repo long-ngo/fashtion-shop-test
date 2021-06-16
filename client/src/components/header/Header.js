@@ -1,8 +1,9 @@
 import Topbar from './topbar/Topbar';
 import Navbar from './navbar/Navbar';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './Header.css';
+import { useSelector } from 'react-redux';
 
 const select = (el, all = false) => {
     el = el.trim();
@@ -40,7 +41,7 @@ const scrollto = (el) => {
 };
 
 const Header = ({ transparent }) => {
-    const [count, setCount] = useState(0);
+    const cartList = useSelector((state) => state.cart.list);
 
     useEffect(() => {
         /**
@@ -164,13 +165,6 @@ const Header = ({ transparent }) => {
         });
     }, []);
 
-    useEffect(() => {
-        const carts = JSON.parse(localStorage.getItem('carts'));
-        if (carts) {
-            setCount(carts.reduce((count) => count + 1, 0));
-        }
-    }, []);
-
     return (
         <>
             <Topbar transparent={transparent} />
@@ -188,7 +182,10 @@ const Header = ({ transparent }) => {
                     </div>
                     <Navbar />
                     <Link to="/cart" className="book-a-table-btn">
-                        Giỏ hàng <span class="badge bg-warning">{count}</span>
+                        Giỏ hàng{' '}
+                        <span className="badge bg-warning">
+                            {cartList.length}
+                        </span>
                     </Link>
                 </div>
             </header>

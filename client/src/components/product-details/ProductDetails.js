@@ -1,11 +1,16 @@
 import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import axios from 'axios';
+
 import './ProductDetails.css';
 import Breadcrumbs from '../breadcrumbs/Breadcrumbs';
-import { useParams } from 'react-router-dom';
+import { addCart } from '../../actions/cart';
 
 const ProductDetails = ({ handleTransparent }) => {
     const [products, setProducts] = useState([]);
+    const dispatch = useDispatch();
+
     let { id } = useParams();
 
     useEffect(() => {
@@ -29,33 +34,8 @@ const ProductDetails = ({ handleTransparent }) => {
     }, []);
 
     const addToCart = (product) => {
-        if (!localStorage.getItem('carts')) {
-            localStorage.setItem('carts', '[]');
-        }
-
-        //hash code
         product.count = 1;
-
-        let carts = JSON.parse(localStorage.getItem('carts'));
-        let flag = false;
-
-        carts = carts.map((cart) => {
-            if (cart._id === product._id) {
-                cart.count += product.count;
-                flag = true;
-            }
-            return cart;
-        });
-
-        let products = [];
-
-        if (flag) {
-            products = [...carts];
-        } else {
-            products = [...carts, product];
-        }
-
-        localStorage.setItem('carts', JSON.stringify(products));
+        dispatch(addCart(product));
     };
 
     return (
@@ -64,11 +44,11 @@ const ProductDetails = ({ handleTransparent }) => {
             <section className="inner-page">
                 <div className="container">
                     <div className="row">
-                        {products.map((product) => {
+                        {products.map((product, index) => {
                             return (
                                 <>
                                     {/* Left Column / Headphones Image */}
-                                    <div className="left-column">
+                                    <div className="left-column" key={index}>
                                         {/* <img
                                         data-image="black"
                                         src={product.image}

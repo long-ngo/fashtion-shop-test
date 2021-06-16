@@ -2,7 +2,8 @@ import Breadcrumbs from '../breadcrumbs/Breadcrumbs';
 import { useEffect, useState } from 'react';
 import './Cart.css';
 import { Link } from 'react-router-dom';
-import { Button } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import { removeCart } from '../../actions/cart';
 
 // const cartArr = [
 //     {
@@ -47,37 +48,17 @@ const priceTotal = (carts) => {
     }, 0);
 };
 
-const countCart = (carts) => {
-    return carts.reduce((count) => {
-        return count + 1;
-    }, 0);
-};
-
 const Cart = ({ handleTransparent }) => {
-    const [carts, setCarts] = useState([]);
-    //localStorage.setItem('carts', JSON.stringify(cartArr));
-
-    const deleteCartById = (id) => {
-        const newCart = carts.filter((cart) => cart._id !== id);
-        setCarts(newCart);
-        localStorage.setItem('carts', JSON.stringify(newCart));
-    };
+    const cartList = useSelector((state) => state.cart.list);
+    const dispatch = useDispatch();
 
     useEffect(() => {
         handleTransparent(false);
     }, []);
 
-    useEffect(() => {
-        if (!localStorage.getItem('carts')) {
-            localStorage.setItem('carts', JSON.stringify(carts));
-        }
-
-        setCarts(JSON.parse(localStorage.getItem('carts')));
-
-        return () => {
-            setCarts([]);
-        };
-    }, []);
+    const handleDelete = (id) => {
+        dispatch(removeCart(id));
+    };
 
     return (
         <main id="main">
@@ -92,12 +73,13 @@ const Cart = ({ handleTransparent }) => {
                                 <div className="ibox">
                                     <div className="ibox-title">
                                         <span className="pull-right">
-                                            (<strong>{countCart(carts)}</strong>
-                                            ) Sản phẩm
+                                            (<strong>{cartList.length}</strong>)
+                                            Sản phẩm
                                         </span>
                                         <h5>Trong giỏ hàng của bạn</h5>
                                     </div>
-                                    {carts.map((cart) => {
+
+                                    {cartList.map((cart) => {
                                         return (
                                             <div
                                                 className="ibox-content"
@@ -179,7 +161,7 @@ const Cart = ({ handleTransparent }) => {
                                                                     <a
                                                                         className="text-muted btn"
                                                                         onClick={() => {
-                                                                            deleteCartById(
+                                                                            handleDelete(
                                                                                 cart._id
                                                                             );
                                                                         }}
@@ -217,7 +199,7 @@ const Cart = ({ handleTransparent }) => {
                                     <div className="ibox-content">
                                         <span>Tổng cộng</span>
                                         <h2 className="font-bold">
-                                            ${priceTotal(carts)}
+                                            ${priceTotal(cartList)}
                                         </h2>
                                         <hr />
                                         <span className="text-muted small">
