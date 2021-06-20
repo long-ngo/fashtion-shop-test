@@ -11,3 +11,13 @@ export const removeCart = (id) => {
         payload: id,
     };
 };
+
+export const editCart = (id, count) => {
+    return {
+        type: 'EDIT_CART',
+        payload: {
+            id,
+            count,
+        },
+    };
+};

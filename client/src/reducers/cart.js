@@ -44,6 +44,22 @@ const cartReducer = (state = initialState, action) => {
             };
         }
 
+        case 'EDIT_CART': {
+            let carts = JSON.parse(localStorage.getItem('carts'));
+            const newList = carts.map((cart) => {
+                if (cart._id === action.payload.id) {
+                    cart.count = action.payload.count;
+                }
+                return cart;
+            });
+            localStorage.setItem('carts', JSON.stringify(newList));
+
+            return {
+                ...state,
+                list: newList,
+            };
+        }
+
         default:
             return state;
     }

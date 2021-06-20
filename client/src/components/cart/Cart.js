@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import './Cart.css';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { removeCart } from '../../actions/cart';
+import { editCart, removeCart } from '../../actions/cart';
 
 // const cartArr = [
 //     {
@@ -49,6 +49,7 @@ const priceTotal = (carts) => {
 };
 
 const Cart = ({ handleTransparent }) => {
+    const [count, setCount] = useState(1);
     const cartList = useSelector((state) => state.cart.list);
     const dispatch = useDispatch();
 
@@ -58,6 +59,21 @@ const Cart = ({ handleTransparent }) => {
 
     const handleDelete = (id) => {
         dispatch(removeCart(id));
+    };
+
+    const handleEdit = (id, count) => {
+        dispatch(editCart(id, count));
+    };
+
+    const handleChange = (e) => {
+        let placeholder = parseInt(e.target.placeholder);
+        let value = parseInt(e.target.value ? e.target.value : placeholder);
+        const min = parseInt(e.target.min);
+        const max = parseInt(e.target.max);
+
+        if (value < min || value > max) e.target.value = '';
+
+        setCount(value);
     };
 
     return (
@@ -142,6 +158,9 @@ const Cart = ({ handleTransparent }) => {
                                                                         placeholder={
                                                                             cart.count
                                                                         }
+                                                                        onChange={
+                                                                            handleChange
+                                                                        }
                                                                     />
                                                                 </td>
                                                                 <td>
@@ -153,18 +172,26 @@ const Cart = ({ handleTransparent }) => {
                                                                     </h4>
                                                                 </td>
                                                                 <td className="cart-edit">
-                                                                    <a className="text-muted btn">
+                                                                    <a
+                                                                        className="text-muted btn"
+                                                                        onClick={() =>
+                                                                            handleEdit(
+                                                                                cart._id,
+                                                                                count
+                                                                            )
+                                                                        }
+                                                                    >
                                                                         <i className="fas fa-edit"></i>
                                                                     </a>
                                                                 </td>
                                                                 <td>
                                                                     <a
                                                                         className="text-muted btn"
-                                                                        onClick={() => {
+                                                                        onClick={() =>
                                                                             handleDelete(
                                                                                 cart._id
-                                                                            );
-                                                                        }}
+                                                                            )
+                                                                        }
                                                                     >
                                                                         <i className="fa fa-trash" />
                                                                     </a>
