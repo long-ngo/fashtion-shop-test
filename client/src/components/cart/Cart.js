@@ -49,7 +49,10 @@ const priceTotal = (carts) => {
 };
 
 const Cart = ({ handleTransparent }) => {
-    const [count, setCount] = useState(1);
+    const [cartItem, setCartItem] = useState({
+        id: null,
+        count: 1,
+    });
     const cartList = useSelector((state) => state.cart.list);
     const dispatch = useDispatch();
 
@@ -65,15 +68,25 @@ const Cart = ({ handleTransparent }) => {
         dispatch(editCart(id, count));
     };
 
-    const handleChange = (e) => {
-        let placeholder = parseInt(e.target.placeholder);
-        let value = parseInt(e.target.value ? e.target.value : placeholder);
+    const handleChange = (id, e) => {
+        const placeholder = parseInt(e.target.placeholder);
         const min = parseInt(e.target.min);
         const max = parseInt(e.target.max);
 
-        if (value < min || value > max) e.target.value = '';
+        let count = parseInt(e.target.value ? e.target.value : placeholder);
 
-        setCount(value);
+        console.log('placeholder', placeholder);
+        console.log('count', count);
+
+        if (count < min || count > max) {
+            e.target.value = '';
+            count = placeholder;
+        }
+
+        setCartItem({
+            id,
+            count,
+        });
     };
 
     return (
@@ -158,9 +171,14 @@ const Cart = ({ handleTransparent }) => {
                                                                         placeholder={
                                                                             cart.count
                                                                         }
-                                                                        onChange={
-                                                                            handleChange
-                                                                        }
+                                                                        onChange={(
+                                                                            e
+                                                                        ) => {
+                                                                            handleChange(
+                                                                                cart._id,
+                                                                                e
+                                                                            );
+                                                                        }}
                                                                     />
                                                                 </td>
                                                                 <td>
@@ -174,12 +192,17 @@ const Cart = ({ handleTransparent }) => {
                                                                 <td className="cart-edit">
                                                                     <a
                                                                         className="text-muted btn"
-                                                                        onClick={() =>
-                                                                            handleEdit(
-                                                                                cart._id,
-                                                                                count
-                                                                            )
-                                                                        }
+                                                                        onClick={() => {
+                                                                            if (
+                                                                                cartItem.id ===
+                                                                                cart._id
+                                                                            ) {
+                                                                                handleEdit(
+                                                                                    cart._id,
+                                                                                    cartItem.count
+                                                                                );
+                                                                            }
+                                                                        }}
                                                                     >
                                                                         <i className="fas fa-edit"></i>
                                                                     </a>
