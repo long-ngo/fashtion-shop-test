@@ -1,0 +1,34 @@
+{
+    "name": "fashion-shop",
+    "version": "1.0.0",
+    "description": "open terminal",
+    "main": "index.js",
+    "scripts": {
+        "start": "node index.js",
+        "server": "nodemon index.js",
+        "client": "npm start --prefix client",
+        "dev": "concurrently \"npm run server\" \"npm run client\"",
+        "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
+    },
+    "keywords": [],
+    "author": "ryu",
+    "license": "ISC",
+    "dependencies": {
+        "concurrently": "^6.2.0",
+        "cors": "^2.8.5",
+        "dotenv": "^8.2.0",
+        "express": "^4.17.1",
+        "glightbox": "^3.0.9",
+        "mongoose": "^5.12.7",
+        "nodemon": "^2.0.7"
+    },
+    "devDependencies": {},
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/long-ngo/fashtion-shop.git"
+    },
+    "bugs": {
+        "url": "https://github.com/long-ngo/fashtion-shop/issues"
+    },
+    "homepage": "https://github.com/long-ngo/fashtion-shop#readme"
+}
