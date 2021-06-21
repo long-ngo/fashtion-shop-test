@@ -4,12 +4,8 @@ import axios from 'axios';
 import Breadcrumbs from '../breadcrumbs/Breadcrumbs';
 import './Products.css';
 
-const Products = ({ handleTransparent }) => {
+const Products = () => {
     const [products, setProduct] = useState([]);
-
-    useEffect(() => {
-        handleTransparent(false);
-    }, []);
 
     useEffect(() => {
         axios

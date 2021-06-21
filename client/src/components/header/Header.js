@@ -1,6 +1,6 @@
 import Topbar from './topbar/Topbar';
 import Navbar from './navbar/Navbar';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Header.css';
 import { useSelector } from 'react-redux';
@@ -36,12 +36,14 @@ const scrollto = (el) => {
     let elementPos = select(el).offsetTop;
     window.scrollTo({
         top: elementPos - offset,
-        behavior: 'smooth',
+        behavior: 'smooth'
     });
 };
 
-const Header = ({ transparent }) => {
+const Header = () => {
     const cartList = useSelector((state) => state.cart.list);
+    const transparent = useSelector((state) => state.header.transparent);
+    const hide = useSelector((state) => state.header.hide);
 
     useEffect(() => {
         /**
@@ -166,7 +168,7 @@ const Header = ({ transparent }) => {
     }, []);
 
     return (
-        <>
+        <header style={{ display: hide ? 'none' : 'block' }}>
             <Topbar transparent={transparent} />
             <header
                 id="header"
@@ -189,7 +191,7 @@ const Header = ({ transparent }) => {
                     </Link>
                 </div>
             </header>
-        </>
+        </header>
     );
 };
 

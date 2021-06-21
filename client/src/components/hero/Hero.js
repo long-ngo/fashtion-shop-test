@@ -1,7 +1,11 @@
 import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { transparentHeader, clearHeader } from '../../actions/header';
 import './Hero.css';
 
-const Hero = ({ handleTransparent }) => {
+const Hero = () => {
+    const dispatch = useDispatch();
+
     const select = (el, all = false) => {
         el = el.trim();
         if (all) {
@@ -12,7 +16,8 @@ const Hero = ({ handleTransparent }) => {
     };
 
     useEffect(() => {
-        handleTransparent(true);
+        dispatch(transparentHeader());
+        return () => dispatch(clearHeader());
     }, []);
 
     useEffect(() => {
@@ -53,7 +58,7 @@ const Hero = ({ handleTransparent }) => {
                         <div
                             className="carousel-item active"
                             style={{
-                                background: 'url(assets/img/slide/slide-1.jpg)',
+                                background: 'url(assets/img/slide/slide-1.jpg)'
                             }}
                         >
                             <div className="carousel-container">
@@ -85,7 +90,7 @@ const Hero = ({ handleTransparent }) => {
                         <div
                             className="carousel-item"
                             style={{
-                                background: 'url(assets/img/slide/slide-2.jpg)',
+                                background: 'url(assets/img/slide/slide-2.jpg)'
                             }}
                         >
                             <div className="carousel-container">
@@ -123,7 +128,7 @@ const Hero = ({ handleTransparent }) => {
                         <div
                             className="carousel-item"
                             style={{
-                                background: 'url(assets/img/slide/slide-3.jpg)',
+                                background: 'url(assets/img/slide/slide-3.jpg)'
                             }}
                         >
                             <div className="carousel-background">

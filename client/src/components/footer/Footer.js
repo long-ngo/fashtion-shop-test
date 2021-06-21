@@ -1,10 +1,16 @@
 import './Footer.css';
+import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const Footer = () => {
+    const hide = useSelector((state) => state.footer.hide);
+
     return (
-        <footer id="footer">
+        <footer id="footer" style={{ display: hide ? 'none' : 'block' }}>
             <div className="container">
-                <h3>Fashtion Shop</h3>
+                <h3>
+                    <Link to="/">Fashtion Shop</Link>
+                </h3>
                 <p>
                     Et aut eum quis fuga eos sunt ipsa nihil. Labore corporis
                     magni eligendi fuga maxime saepe commodi placeat.

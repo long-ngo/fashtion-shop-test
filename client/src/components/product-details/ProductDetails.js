@@ -10,12 +10,7 @@ import { addCart } from '../../actions/cart';
 const ProductDetails = ({ handleTransparent }) => {
     const [products, setProducts] = useState([]);
     const dispatch = useDispatch();
-
     let { id } = useParams();
-
-    useEffect(() => {
-        handleTransparent(false);
-    }, []);
 
     useEffect(() => {
         axios

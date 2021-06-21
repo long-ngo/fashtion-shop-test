@@ -1,5 +1,5 @@
 import Breadcrumbs from '../breadcrumbs/Breadcrumbs';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import './Cart.css';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -48,17 +48,14 @@ const priceTotal = (carts) => {
     }, 0);
 };
 
-const Cart = ({ handleTransparent }) => {
+const Cart = () => {
     const [cartItem, setCartItem] = useState({
         id: null,
-        count: 1,
+        count: 1
     });
-    const cartList = useSelector((state) => state.cart.list);
-    const dispatch = useDispatch();
 
-    useEffect(() => {
-        handleTransparent(false);
-    }, []);
+    const dispatch = useDispatch();
+    const cartList = useSelector((state) => state.cart.list);
 
     const handleDelete = (id) => {
         dispatch(removeCart(id));
@@ -85,7 +82,7 @@ const Cart = ({ handleTransparent }) => {
 
         setCartItem({
             id,
-            count,
+            count
         });
     };
 
@@ -128,7 +125,7 @@ const Cart = ({ handleTransparent }) => {
                                                                                 width: '100%',
                                                                                 height: '100%',
                                                                                 objectFit:
-                                                                                    'cover',
+                                                                                    'cover'
                                                                             }}
                                                                         />
                                                                     </div>

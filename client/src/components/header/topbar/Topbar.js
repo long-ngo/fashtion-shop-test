@@ -8,7 +8,7 @@ const DAY = [
     'Wednesday',
     'Thursday',
     'Friday',
-    'Saturday',
+    'Saturday'
 ];
 
 const MONTH = [
@@ -23,7 +23,7 @@ const MONTH = [
     'September',
     'October',
     'November',
-    'December',
+    'December'
 ];
 
 const fomatDate = (date) => {
