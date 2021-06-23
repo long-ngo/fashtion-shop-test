@@ -11,7 +11,6 @@ import ProductDetails from './product-details/ProductDetails';
 import About from './main/about/About';
 import Error from './Error';
 import Cart from './cart/Cart';
-import Admin from './admin/Admin';
 
 const App = () => {
     return (
@@ -53,12 +52,6 @@ const App = () => {
                         path="/cart"
                         component={() => {
                             return <Cart />;
-                        }}
-                    />
-                    <Route
-                        path="/admin"
-                        component={() => {
-                            return <Admin />;
                         }}
                     />
                     <Route

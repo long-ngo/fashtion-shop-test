@@ -1,11 +1,6 @@
-import { useEffect } from 'react';
 import Breadcrumbs from './breadcrumbs/Breadcrumbs';
 
-const Error = ({ handleTransparent }) => {
-    useEffect(() => {
-        handleTransparent(false);
-    }, []);
-
+const Error = () => {
     return (
         <main id="main">
             <Breadcrumbs />

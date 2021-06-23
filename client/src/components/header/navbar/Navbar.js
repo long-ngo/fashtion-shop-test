@@ -83,11 +83,6 @@ const Navbar = () => {
                         Về chúng tôi
                     </a>
                 </li>
-                <li>
-                    <Link to="/admin" className="nav-link">
-                        admin
-                    </Link>
-                </li>
             </ul>
             <i className="bi bi-list mobile-nav-toggle" />
         </nav>
