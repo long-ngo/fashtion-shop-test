@@ -5,43 +5,6 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { editCart, removeCart } from '../../actions/cart';
 
-// const cartArr = [
-//     {
-//         name: 'Áo thun',
-//         price: 3900,
-//         image: 'https://images.pexels.com/photos/1386604/pexels-photo-1386604.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
-//         discount: 10,
-//         count: 2,
-//         description:
-//             'Trang phục quen thuộc giản dị nhưng vẫn đẹp và hợp thời trang',
-//     },
-//     {
-//         name: 'Áo hai dây',
-//         price: 100,
-//         image: 'https://images.pexels.com/photos/1386604/pexels-photo-1386604.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
-//         discount: 8,
-//         count: 3,
-//         description:
-//             'Còn gì tuyệt vời hơn được diện một chiếc áo hai dây trong những ngày hè oi bức',
-//     },
-//     {
-//         name: 'Áo ba lỗ',
-//         price: 110,
-//         image: 'https://images.pexels.com/photos/1386604/pexels-photo-1386604.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
-//         discount: 5,
-//         count: 10,
-//         description: 'Trang phục phù hợp cho mùa hè',
-//     },
-//     {
-//         name: 'Váy',
-//         price: 130,
-//         image: 'https://images.pexels.com/photos/1386604/pexels-photo-1386604.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
-//         discount: 2,
-//         count: 20,
-//         description: 'Quá quen thuộc với chị em phụ nữ',
-//     },
-// ];
-
 const priceTotal = (carts) => {
     return carts.reduce((count, cart) => {
         return count + (cart.price - cart.discount) * cart.count;
