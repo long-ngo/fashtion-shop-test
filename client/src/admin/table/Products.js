@@ -1,8 +1,39 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { MDBDataTableV5 } from 'mdbreact';
+
+const data = {
+    columns: [
+        {
+            label: 'Tên sản phẩm',
+            field: 'name',
+            sort: 'asc',
+            width: 150
+        },
+        {
+            label: 'Giá',
+            field: 'price',
+            sort: 'asc',
+            width: 270
+        },
+        {
+            label: 'Giảm giá',
+            field: 'discount',
+            sort: 'asc',
+            width: 200
+        },
+        {
+            label: 'Kho',
+            field: 'stock',
+            sort: 'asc',
+            width: 200
+        }
+    ],
+    rows: []
+};
 
 export default () => {
-    const [products, setProduct] = useState([]);
+    const [products, setProduct] = useState({ ...data });
 
     useEffect(() => {
         axios
@@ -14,10 +45,11 @@ export default () => {
                 }/api/products`
             )
             .then((res) => {
-                setProduct(res.data);
+                data.rows = res.data;
+                setProduct({ ...data });
             })
             .catch((err) => console.log(err));
-        return () => setProduct([]);
+        return () => setProduct({});
     }, []);
 
     return (
@@ -27,7 +59,14 @@ export default () => {
                 Products table
             </div>
             <div className="card-body">
-                <table id="datatablesSimple">
+                <MDBDataTableV5
+                    hover
+                    entriesOptions={[5, 20, 25]}
+                    entries={5}
+                    pagesAmount={4}
+                    data={products}
+                />
+                {/* <table id="datatablesSimple">
                     <thead>
                         <tr>
                             <th>Tên sản phẩm</th>
@@ -60,6 +99,7 @@ export default () => {
                         })}
                     </tbody>
                 </table>
+             */}
             </div>
         </div>
     );

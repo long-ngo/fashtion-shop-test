@@ -4,6 +4,7 @@ import { offHeader, onHeader } from '../actions/header';
 import { offFooter, onFooter } from '../actions/footer';
 import { Route, Switch } from 'react-router-dom';
 import './Admin.css';
+
 import Topbar from './topbar/Topbar';
 import Navbar from './navbar/Navbar';
 import Content from './content/Content';
@@ -22,24 +23,26 @@ const Admin = () => {
     }, []);
 
     return (
-        <div className="sb-nav-fixed">
-            <Topbar />
+        <div className="admin">
+            <div className="sb-nav-fixed">
+                <Topbar />
 
-            <div id="layoutSidenav">
-                <div id="layoutSidenav_nav">
-                    <Navbar />
-                </div>
+                <div id="layoutSidenav">
+                    <div id="layoutSidenav_nav">
+                        <Navbar />
+                    </div>
 
-                <div id="layoutSidenav_content">
-                    <Switch>
-                        <Route exact path="/admin">
-                            <Content />
-                        </Route>
-                        <Route path="/admin/tables">
-                            <Table />
-                        </Route>
-                    </Switch>
-                    <Footer />
+                    <div id="layoutSidenav_content">
+                        <Switch>
+                            <Route exact path="/admin">
+                                <Content />
+                            </Route>
+                            <Route path="/admin/tables">
+                                <Table />
+                            </Route>
+                        </Switch>
+                        <Footer />
+                    </div>
                 </div>
             </div>
         </div>
