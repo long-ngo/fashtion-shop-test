@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { MDBDataTableV5 } from 'mdbreact';
+import { Redirect } from 'react-router-dom';
 
 const data = {
     columns: [
@@ -26,11 +27,12 @@ const data = {
     rows: []
 };
 
-export default () => {
+const Users = () => {
     const [users, setUser] = useState({ ...data });
+    const [userId, setUserId] = useState('');
 
     const handleClick = (id) => {
-        alert(id);
+        setUserId(id);
     };
 
     useEffect(() => {
@@ -43,7 +45,7 @@ export default () => {
                 }/api/users`
             )
             .then((res) => {
-                data.rows = res.data.map((user) => {
+                data.rows = res.data.map((user, index) => {
                     user.clickEvent = () => {
                         handleClick(user._id);
                     };
@@ -70,7 +72,16 @@ export default () => {
                     entries={5}
                     pagesAmount={4}
                     data={users}
+                    fullPagination
                 />
+
+                {(() => {
+                    if (userId)
+                        return (
+                            <Redirect to={`/admin/tables/users/${userId}`} />
+                        );
+                })()}
+
                 {/* <table id="datatablesSimple">
                     <thead>
                         <tr>
@@ -103,3 +114,5 @@ export default () => {
         </div>
     );
 };
+
+export default Users;
