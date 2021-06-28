@@ -1,10 +1,8 @@
 import { Route, Switch } from 'react-router-dom';
 import Users from './Users';
 import Products from './Products';
-import { useEffect } from 'react';
 
 export default () => {
-    useEffect(() => {}, []);
     return (
         <main>
             <div className="container-fluid px-4">

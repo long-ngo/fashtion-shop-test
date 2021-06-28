@@ -34,11 +34,11 @@ const Admin = () => {
 
                     <div id="layoutSidenav_content">
                         <Switch>
-                            <Route exact path="/admin">
-                                <Content />
-                            </Route>
                             <Route path="/admin/tables">
                                 <Table />
+                            </Route>
+                            <Route path="/admin">
+                                <Content />
                             </Route>
                         </Switch>
                         <Footer />
