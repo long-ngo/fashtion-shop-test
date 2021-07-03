@@ -14,6 +14,13 @@ class ProductController {
             .then((products) => res.json(products))
             .catch(next);
     }
+
+    //[PUT] /api/products/:id
+    editProductById(req, res, next) {
+        Product.updateOne({ _id: req.params.id }, req.body)
+            .then(() => res.send('Done!'))
+            .catch(next);
+    }
 }
 
 module.exports = new ProductController();

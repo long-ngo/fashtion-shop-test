@@ -31,10 +31,6 @@ const Users = () => {
     const [users, setUser] = useState({ ...data });
     const [userId, setUserId] = useState('');
 
-    const handleClick = (id) => {
-        setUserId(id);
-    };
-
     useEffect(() => {
         axios
             .get(
@@ -45,10 +41,8 @@ const Users = () => {
                 }/api/users`
             )
             .then((res) => {
-                data.rows = res.data.map((user, index) => {
-                    user.clickEvent = () => {
-                        handleClick(user._id);
-                    };
+                data.rows = res.data.map((user) => {
+                    user.clickEvent = () => setUserId(user._id);
                     return user;
                 });
 
@@ -74,43 +68,11 @@ const Users = () => {
                     data={users}
                     fullPagination
                 />
-
-                {(() => {
-                    if (userId)
-                        return (
-                            <Redirect to={`/admin/tables/users/${userId}`} />
-                        );
-                })()}
-
-                {/* <table id="datatablesSimple">
-                    <thead>
-                        <tr>
-                            <th>Tên</th>
-                            <th>Tên đăng nhập</th>
-                            <th>Địa chỉ</th>
-                        </tr>
-                    </thead>
-                    <tfoot>
-                        <tr>
-                            <th>Tên</th>
-                            <th>Tên đăng nhập</th>
-                            <th>Địa chỉ</th>
-                        </tr>
-                    </tfoot>
-                    <tbody>
-                        {users.map((user) => {
-                            return (
-                                <tr>
-                                    <td>{user.name}</td>
-                                    <td>{user.username}</td>
-                                    <td>{user.address.street}</td>
-                                </tr>
-                            );
-                        })}
-                    </tbody>
-                </table>
-             */}
             </div>
+            {(() => {
+                if (userId)
+                    return <Redirect to={`/admin/tables/users/${userId}`} />;
+            })()}
         </div>
     );
 };

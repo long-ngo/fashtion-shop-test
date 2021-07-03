@@ -2,7 +2,7 @@ const initialState = {
     list: localStorage.getItem('carts')
         ? JSON.parse(localStorage.getItem('carts'))
         : [],
-    activeId: null,
+    activeId: null
 };
 
 const cartReducer = (state = initialState, action) => {
@@ -29,7 +29,7 @@ const cartReducer = (state = initialState, action) => {
 
             return {
                 ...state,
-                list: newList,
+                list: newList
             };
         }
 
@@ -40,11 +40,11 @@ const cartReducer = (state = initialState, action) => {
 
             return {
                 ...state,
-                list: newList,
+                list: newList
             };
         }
 
-        case 'EDIT_CART': {
+        case 'EDIT_COUNT_CART': {
             let carts = JSON.parse(localStorage.getItem('carts'));
             const newList = carts.map((cart) => {
                 if (cart._id === action.payload.id) {
@@ -56,7 +56,30 @@ const cartReducer = (state = initialState, action) => {
 
             return {
                 ...state,
-                list: newList,
+                list: newList
+            };
+        }
+
+        case 'EDIT_CART': {
+            let carts = JSON.parse(localStorage.getItem('carts'));
+
+            const newList = carts.map((cart) => {
+                if (cart._id === action.payload.id) {
+                    cart.name = action.payload.product.name;
+                    cart.price = action.payload.product.price;
+                    cart.discount = action.payload.product.discount;
+                    cart.stock = action.payload.product.stock;
+                    cart.image = action.payload.product.image;
+                    cart.description = action.payload.product.description;
+                }
+                return cart;
+            });
+
+            localStorage.setItem('carts', JSON.stringify(newList));
+
+            return {
+                ...state,
+                list: newList
             };
         }
 

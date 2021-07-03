@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { MDBDataTableV5 } from 'mdbreact';
+import { Redirect } from 'react-router';
 
 const data = {
     columns: [
@@ -34,6 +35,7 @@ const data = {
 
 export default () => {
     const [products, setProduct] = useState({ ...data });
+    const [productId, setProductId] = useState('');
 
     useEffect(() => {
         axios
@@ -45,7 +47,10 @@ export default () => {
                 }/api/products`
             )
             .then((res) => {
-                data.rows = res.data;
+                data.rows = res.data.map((product, index) => {
+                    product.clickEvent = () => setProductId(product._id);
+                    return product;
+                });
                 setProduct({ ...data });
             })
             .catch((err) => console.log(err));
@@ -65,42 +70,16 @@ export default () => {
                     entries={5}
                     pagesAmount={4}
                     data={products}
+                    searchTop
+                    searchBottom={false}
                 />
-                {/* <table id="datatablesSimple">
-                    <thead>
-                        <tr>
-                            <th>Tên sản phẩm</th>
-                            <th>Giá</th>
-                            <th>Kho</th>
-                            <th>Giảm giá</th>
-                            <th>Mô tả</th>
-                        </tr>
-                    </thead>
-                    <tfoot>
-                        <tr>
-                            <th>Tên sản phẩm</th>
-                            <th>Giá</th>
-                            <th>Kho</th>
-                            <th>Giảm giá</th>
-                            <th>Mô tả</th>
-                        </tr>
-                    </tfoot>
-                    <tbody>
-                        {products.map((product, index) => {
-                            return (
-                                <tr key={index}>
-                                    <td>{product.name}</td>
-                                    <td>{product.price}</td>
-                                    <td>{product.stock}</td>
-                                    <td>{product.discount}</td>
-                                    <td>{product.description}</td>
-                                </tr>
-                            );
-                        })}
-                    </tbody>
-                </table>
-             */}
             </div>
+            {(() => {
+                if (productId)
+                    return (
+                        <Redirect to={`/admin/tables/products/${productId}`} />
+                    );
+            })()}
         </div>
     );
 };

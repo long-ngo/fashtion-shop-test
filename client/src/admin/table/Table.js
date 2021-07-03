@@ -1,6 +1,8 @@
 import { Route, Switch } from 'react-router-dom';
 import Users from './Users';
 import Products from './Products';
+import ProductDetals from './ProductDetals';
+import UserDetals from './UserDetals';
 
 export default () => {
     return (
@@ -27,7 +29,13 @@ export default () => {
                 </div>
 
                 <Switch>
-                    <Route exact path="/admin/tables/users">
+                    <Route path="/admin/tables/users/:id">
+                        <UserDetals />
+                    </Route>
+                    <Route path="/admin/tables/products/:id">
+                        <ProductDetals />
+                    </Route>
+                    <Route path="/admin/tables/users">
                         <Users />
                     </Route>
                     <Route path="/admin/tables/products">

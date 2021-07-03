@@ -3,7 +3,7 @@ import { useState } from 'react';
 import './Cart.css';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { editCart, removeCart } from '../../actions/cart';
+import { editCountCart, removeCart } from '../../actions/cart';
 
 const priceTotal = (carts) => {
     return carts.reduce((count, cart) => {
@@ -25,7 +25,7 @@ const Cart = () => {
     };
 
     const handleEdit = (id, count) => {
-        dispatch(editCart(id, count));
+        dispatch(editCountCart(id, count));
     };
 
     const handleChange = (id, e) => {
