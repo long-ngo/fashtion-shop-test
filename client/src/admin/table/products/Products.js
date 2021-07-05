@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { MDBDataTableV5 } from 'mdbreact';
-import { Redirect } from 'react-router';
+import { Link, Redirect } from 'react-router-dom';
+import { BsPlus } from 'react-icons/bs';
+import './Products.css';
 
 const data = {
     columns: [
@@ -64,15 +66,24 @@ export default () => {
                 Products table
             </div>
             <div className="card-body">
-                <MDBDataTableV5
-                    hover
-                    entriesOptions={[5, 20, 25]}
-                    entries={5}
-                    pagesAmount={4}
-                    data={products}
-                    searchTop
-                    searchBottom={false}
-                />
+                <div>
+                    <Link
+                        to="/admin/tables/products/create"
+                        className="card-body__btn"
+                    >
+                        <BsPlus fontSize="1.8em" />
+                    </Link>
+
+                    <MDBDataTableV5
+                        hover
+                        entriesOptions={[5, 20, 25]}
+                        entries={5}
+                        pagesAmount={4}
+                        data={products}
+                        searchTop
+                        searchBottom={false}
+                    />
+                </div>
             </div>
             {(() => {
                 if (productId)

@@ -1,0 +1,10 @@
+.card-body {
+    position: relative;
+}
+
+.card-body__btn {
+    position: absolute;
+    right: 0;
+    margin-right: 2.5%;
+    padding: 2px;
+}
