@@ -53,6 +53,18 @@ export default () => {
         dispatch(editCart(id, product));
     };
 
+    const onDeleteProduct = () => {
+        axios
+            .delete(
+                `${
+                    process.env.NODE_ENV === 'production'
+                        ? window.location.origin
+                        : 'http://localhost:5000'
+                }/api/products/${id}`
+            )
+            .catch((err) => console.log(err));
+    };
+
     return (
         <div className="card-body">
             {(() => {
@@ -67,7 +79,8 @@ export default () => {
                 return (
                     <ProductForm
                         key={index}
-                        submit={handleSubmit}
+                        onSubmit={handleSubmit}
+                        onDelete={onDeleteProduct}
                         data={product}
                     />
                 );

@@ -1,5 +1,4 @@
 import axios from 'axios';
-
 import ProductForm from './ProductForm';
 
 export default () => {
@@ -14,11 +13,22 @@ export default () => {
             image: e.target['image'].value,
             description: e.target['description'].value
         };
+
+        axios
+            .post(
+                `${
+                    process.env.NODE_ENV === 'production'
+                        ? window.location.origin
+                        : 'http://localhost:5000'
+                }/api/products/create`,
+                product
+            )
+            .catch((err) => console.log(err));
     };
 
     return (
         <div className="card-body">
-            <ProductForm submit={handleSubmit} />
+            <ProductForm onSubmit={handleSubmit} />
         </div>
     );
 };

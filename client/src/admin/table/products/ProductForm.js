@@ -1,8 +1,10 @@
 import { Form, Button, Col } from 'react-bootstrap';
+import { FaTrash } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
-export default ({ submit, data = {} }) => {
+export default ({ onSubmit, data = {}, onDelete = () => {} }) => {
     return (
-        <Form onSubmit={submit}>
+        <Form onSubmit={onSubmit}>
             <Form.Row>
                 <Form.Group as={Col} controlId="formGridName">
                     <Form.Label>Tên sản phẩm</Form.Label>
@@ -57,8 +59,21 @@ export default ({ submit, data = {} }) => {
             </Form.Group>
 
             <Button variant="primary" type="submit">
-                {data.name ? 'Cập nhập' : 'Tạo'}
+                {Object.keys(data).length > 0 ? 'Cập nhập' : 'Tạo'}
             </Button>
+
+            {(() => {
+                if (Object.keys(data).length > 0)
+                    return (
+                        <Link
+                            to="/admin/tables/products"
+                            className="card-body__btn"
+                            onClick={onDelete}
+                        >
+                            <FaTrash fontSize="1.2em" />
+                        </Link>
+                    );
+            })()}
         </Form>
     );
 };
