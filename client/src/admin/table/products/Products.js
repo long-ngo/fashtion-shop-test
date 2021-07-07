@@ -80,6 +80,7 @@ export default () => {
                         entries={5}
                         pagesAmount={4}
                         data={products}
+                        fullPagination
                         searchTop
                         searchBottom={false}
                     />

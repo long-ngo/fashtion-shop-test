@@ -1,7 +1,8 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { MDBDataTableV5 } from 'mdbreact';
-import { Redirect } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
+import { BsPlus } from 'react-icons/bs';
 
 const data = {
     columns: [
@@ -60,6 +61,12 @@ const Users = () => {
             </div>
 
             <div className="card-body">
+                <Link
+                    to="/admin/tables/users/create"
+                    className="card-body__btn"
+                >
+                    <BsPlus fontSize="1.8em" />
+                </Link>
                 <MDBDataTableV5
                     hover
                     entriesOptions={[5, 20, 25]}
@@ -67,6 +74,8 @@ const Users = () => {
                     pagesAmount={4}
                     data={users}
                     fullPagination
+                    searchTop
+                    searchBottom={false}
                 />
             </div>
             {(() => {

@@ -186,7 +186,7 @@ const Header = () => {
                     <Link to="/cart" className="book-a-table-btn">
                         Giỏ hàng{' '}
                         <span className="badge bg-warning">
-                            {cartList.length}
+                            {cartList.length > 0 ? cartList.length : ''}
                         </span>
                     </Link>
                 </div>

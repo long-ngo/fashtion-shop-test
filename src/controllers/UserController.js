@@ -19,9 +19,24 @@ class UserController {
             .catch(next);
     }
 
+    //[POST] api/users/create
+    createUser(req, res, next) {
+        const user = new User(req.body);
+        user.save()
+            .then(() => res.send('Done!'))
+            .catch(next);
+    }
+
     //[PUT] api/users/:id
     editUserById(req, res, next) {
         User.updateOne({ _id: req.params.id }, req.body)
+            .then(() => res.send('Done!'))
+            .catch(next);
+    }
+
+    //[DELETE] api/users/:id
+    deleteUserById(req, res, next) {
+        User.deleteOne({ _id: req.params.id })
             .then(() => res.send('Done!'))
             .catch(next);
     }

@@ -1,15 +1,12 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router';
 import { Spinner } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
-import { editCart, removeCart } from '../../../actions/cart';
-import ProductForm from './ProductForm';
+import { useParams } from 'react-router';
+import UserForm from './UserForm';
 
 export default () => {
+    const [users, setUser] = useState([]);
     const { id } = useParams();
-    const [products, setProduct] = useState([]);
-    const dispatch = useDispatch();
 
     useEffect(() => {
         axios
@@ -18,25 +15,23 @@ export default () => {
                     process.env.NODE_ENV === 'production'
                         ? window.location.origin
                         : 'http://localhost:5000'
-                }/api/products/${id}`
+                }/api/users/${id}`
             )
             .then((res) => {
-                setProduct(res.data);
+                setUser(res.data);
             })
             .catch((err) => console.log(err));
-        return () => setProduct([]);
     }, []);
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        const product = {
+        const user = {
             name: e.target['name'].value,
-            price: e.target['price'].value,
-            discount: e.target['discount'].value,
-            stock: e.target['stock'].value,
-            image: e.target['image'].value,
-            description: e.target['description'].value
+            username: e.target['username'].value,
+            address: e.target['address'].value,
+            phone: e.target['phone'].value,
+            email: e.target['email'].value
         };
 
         axios
@@ -45,45 +40,42 @@ export default () => {
                     process.env.NODE_ENV === 'production'
                         ? window.location.origin
                         : 'http://localhost:5000'
-                }/api/products/${id}`,
-                product
+                }/api/users/${id}`,
+                user
             )
             .catch((err) => console.log(err));
-
-        dispatch(editCart(id, product));
     };
 
-    const onDeleteProduct = () => {
+    const onDelete = () => {
         axios
             .delete(
                 `${
                     process.env.NODE_ENV === 'production'
                         ? window.location.origin
                         : 'http://localhost:5000'
-                }/api/products/${id}`
+                }/api/users/${id}`
             )
             .catch((err) => console.log(err));
-
-        dispatch(removeCart(id));
     };
 
     return (
         <div className="card-body">
             {(() => {
-                if (products.length === 0)
+                if (users.length === 0)
                     return (
                         <Spinner animation="border" role="status">
                             <span className="sr-only">Loading...</span>
                         </Spinner>
                     );
             })()}
-            {products.map((product, index) => {
+
+            {users.map((user, index) => {
                 return (
-                    <ProductForm
+                    <UserForm
                         key={index}
                         onSubmit={handleSubmit}
-                        onDelete={onDeleteProduct}
-                        data={product}
+                        data={user}
+                        onDelete={onDelete}
                     />
                 );
             })}

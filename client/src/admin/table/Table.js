@@ -1,9 +1,10 @@
 import { Route, Switch } from 'react-router-dom';
-import Users from './Users';
 import Products from './products/Products';
 import ProductDetals from './products/ProductDetals';
-import UserDetals from './UserDetals';
 import ProductCreate from './products/ProductCreate';
+import UserDetals from './users/UserDetals';
+import Users from './users/Users';
+import UserCreate from './users/UserCreate';
 
 export default () => {
     return (
@@ -33,17 +34,20 @@ export default () => {
                     <Route path="/admin/tables/products/create">
                         <ProductCreate />
                     </Route>
-                    <Route path="/admin/tables/users/:id">
-                        <UserDetals />
-                    </Route>
                     <Route path="/admin/tables/products/:id">
                         <ProductDetals />
                     </Route>
-                    <Route path="/admin/tables/users">
-                        <Users />
-                    </Route>
                     <Route path="/admin/tables/products">
                         <Products />
+                    </Route>
+                    <Route path="/admin/tables/users/create">
+                        <UserCreate />
+                    </Route>
+                    <Route path="/admin/tables/users/:id">
+                        <UserDetals />
+                    </Route>
+                    <Route path="/admin/tables/users">
+                        <Users />
                     </Route>
                 </Switch>
             </div>
