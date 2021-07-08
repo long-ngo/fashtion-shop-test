@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import { Spinner } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
-import { editCart, removeCart } from '../../../actions/cart';
+import { editCart, removeCart } from '../../../redux/actions/cart';
 import ProductForm from './ProductForm';
 
 export default () => {

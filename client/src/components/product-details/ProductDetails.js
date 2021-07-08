@@ -1,10 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import axios from 'axios';
-
 import './ProductDetails.css';
 import Breadcrumbs from '../breadcrumbs/Breadcrumbs';
-import { addCart } from '../../actions/cart';
+import { addCart } from '../../redux/actions/cart';
 import { useParams } from 'react-router';
 
 const ProductDetails = () => {

@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { transparentHeader, clearHeader } from '../../actions/header';
+import { transparentHeader, clearHeader } from '../../redux/actions/header';
 import './Hero.css';
 
 const Hero = () => {

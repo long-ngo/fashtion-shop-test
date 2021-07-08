@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { offHeader, onHeader } from '../actions/header';
-import { offFooter, onFooter } from '../actions/footer';
+import { offHeader, onHeader } from '../redux/actions/header';
+import { offFooter, onFooter } from '../redux/actions/footer';
 import { Route, Switch } from 'react-router-dom';
 import './Admin.css';
 

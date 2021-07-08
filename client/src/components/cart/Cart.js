@@ -3,7 +3,7 @@ import { useState } from 'react';
 import './Cart.css';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { editCountCart, removeCart } from '../../actions/cart';
+import { editCountCart, removeCart } from '../../redux/actions/cart';
 
 const priceTotal = (carts) => {
     return carts.reduce((count, cart) => {
